@@ -1,9 +1,9 @@
-import {Text, View } from 'react-native';
+import {SafeAreaView, Text, View } from 'react-native';
 
 export default function Reservations() {
   return (
-    <View >
+    <SafeAreaView >
       <Text>Reservations Screen</Text>
-    </View>
+    </SafeAreaView>
   );
 }
