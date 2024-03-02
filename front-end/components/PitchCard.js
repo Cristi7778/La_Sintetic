@@ -1,11 +1,12 @@
-import { StyleSheet,Text, View } from 'react-native';
+import {Text, View } from 'react-native';
+import {globalStyles} from '../styles/globalStyles';
 
-export default function PitchCard(){
+export default function PitchCard({item}){
     return (
-        <View>
-            <Text>
-
-            </Text>
+        <View style={globalStyles.container}>
+            <Text style={globalStyles.paragraph}>{item.name}</Text>
+            <Text style={globalStyles.paragraph}>{item.location}</Text>
+            <Text style={globalStyles.paragraph}>{item.rate}</Text>
         </View>
     )
-}
+};

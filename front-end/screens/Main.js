@@ -1,9 +1,23 @@
-import {SafeAreaView, Text, View } from 'react-native';
+import {SafeAreaView,FlatList,TouchableOpacity,Text } from 'react-native';
+import PitchCard from '../components/PitchCard';
+import { useState } from 'react';
 
 export default function Main() {
+
+  const [pitches, setPitches] = useState([
+    { name: 'PRO-SPORT FOTBAL', location: 'DTR1', rate:200},
+    { name: 'ACS NEW TEAM', location: 'DTR2', rate: 200},
+    { name: 'TEREN GORJULUI', location: 'DTR3', rate: 200},
+  ]);
+
   return (
     <SafeAreaView >
-      <Text>Main Screen</Text>
+      <FlatList data={pitches} renderItem={({ item }) => (
+        <TouchableOpacity onPress={() =>console.log(1)}>
+          <PitchCard item={item} />
+        </TouchableOpacity>
+      )} />
     </SafeAreaView>
   );
 }
+//<PitchCard name={ item.name } location={item.location} rate={item.rate}/>
