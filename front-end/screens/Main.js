@@ -13,7 +13,7 @@ export default function Main({navigation}) {
   return (
     <SafeAreaView >
       <FlatList data={pitches} renderItem={({ item }) => (
-        <TouchableOpacity onPress={() =>{navigation.navigate("AddReservation");}}>
+        <TouchableOpacity onPress={() =>{navigation.navigate("AddReservation",{item});}}>
           <PitchCard item={item} />
         </TouchableOpacity>
       )} />
