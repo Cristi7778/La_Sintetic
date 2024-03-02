@@ -1,12 +1,26 @@
-import {Button, Text, View,StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import {Button, Text, View,StyleSheet, TextInput } from 'react-native';
 
 export default function Login({navigation}) {
-  return (
+  const [username, setUsername] = useState(' ');
+  const [password, setPassword] = useState(' ');
+  return (  
     <View style={styles.container} >
-      <Text>Login Screen</Text>
-      <Button
+      <Text style={styles.titleText}>Login Screen</Text>
+      <TextInput style={styles.input}
+      placeholder='Your username'
+      onChangeText={(value) => setUsername(value)}
+      />
+      <TextInput style={styles.input}
+      placeholder='Your password'
+      onChangeText={(value) => setPassword(value)}
+      />
+      <Button color='teal'
         title="Login"
-        onPress={() => navigation.navigate("Pitches")}
+        onPress={() => {
+          console.log(username,password);
+          navigation.navigate("Pitches");
+        }}
       />
     </View>
   );
@@ -17,6 +31,7 @@ const styles = StyleSheet.create({
   fontSize: 18,
   fontWeight: 'bold',
   color: '#333',
+  margin:10,
 },
 paragraph: {
   marginVertical: 8,
@@ -25,12 +40,15 @@ paragraph: {
 container: {
   flex: 1,
   padding: 20,
+  justifyContent:'center',
+  textAlign:"center",
 },
 input: {
   borderWidth: 1,
   borderColor: '#ddd',
   padding: 10,
   fontSize: 18,
-  borderRadius: 6,
+  borderRadius: 10,
+  marginBottom:15,
 },
 })
