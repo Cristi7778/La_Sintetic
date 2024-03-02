@@ -6,6 +6,8 @@ import Main from '../screens/Main';
 import Reservations from '../screens/Reservations';
 import { Ionicons,MaterialCommunityIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import AddReservations from '../screens/AddReservation';
 const Tab=createBottomTabNavigator();
 function TabGroup(){
   return (
@@ -25,7 +27,7 @@ function TabGroup(){
         tabBarStyle:styles.tabBar,
         headerShown:false,
     })}>
-      <Tab.Screen name='Main' component={Main} />
+      <Tab.Screen name='Main' component={UserStackGroup} />
       <Tab.Screen name='My Reservations' component={Reservations}/>
     </Tab.Navigator>
   )
@@ -37,6 +39,15 @@ function DrawerGroup(){
             <Drawer.Screen name="Log-out" component={Login }drawerLockMode='locked-close' options={{headerShown:false}}/>
             <Drawer.Screen name="Pitches" component={TabGroup}/>
         </Drawer.Navigator>
+    )
+}
+const UserStack=createNativeStackNavigator();
+function UserStackGroup(){
+    return (
+        <UserStack.Navigator>
+            <UserStack.Screen name="Home" component={Main} options={{headerShown:false}}/>
+            <UserStack.Screen name="AddReservation" component={AddReservations}/>
+        </UserStack.Navigator>
     )
 }
 export default function Navigation(){
