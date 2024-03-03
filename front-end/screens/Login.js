@@ -13,6 +13,7 @@ export default function Login({navigation}) {
       />
       <TextInput style={styles.input}
       placeholder='Your password'
+      secureTextEntry={true}
       onChangeText={(value) => setPassword(value)}
       />
       <Button color='teal'
