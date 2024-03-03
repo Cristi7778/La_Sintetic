@@ -2,9 +2,13 @@ import {db} from "./config.js";
 import {DataTypes} from "sequelize";
 
 export const Pitch = db.define("Pitch", {
+	id:{
+		type:DataTypes.INTEGER,
+		primaryKey:true,
+		autoIncrement:true,
+	},
 	location: {
 		type: DataTypes.STRING,
-		primaryKey: true,
 	},
 	name: {
 		type: DataTypes.STRING,
