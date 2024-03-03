@@ -1,4 +1,4 @@
-import { Reservation } from "../models/Reservations";
+import { Reservation } from "../models/Reservations.js";
 
 const getReservations = async (req, res) => {
     const reservation= await Reservation.findAll();

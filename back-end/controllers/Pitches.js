@@ -1,4 +1,4 @@
-import {Pitch} from '../models/Pitches';
+import {Pitch} from '../models/Pitches.js';
 
 const getPitches = async (req, res) => {
     const pitch= await Pitch.findAll();

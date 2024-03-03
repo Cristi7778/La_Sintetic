@@ -1,5 +1,5 @@
 import express from 'express';
-import * as pitchController from "../controllers/Pitches"
+import * as pitchController from "../controllers/Pitches.js"
 
 export const router = express.Router();
 
