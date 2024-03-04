@@ -1,0 +1,14 @@
+/*
+{"username" : "manager7778",
+"password" : "manager123",
+"email" : "cristian@yahoo.com",
+"phone" : "0799185105"}
+{"username" : "manager9875",
+"password" : "manager123",
+"email" : "cristi@yahoo.com",
+"phone" : "0799185409"}
+{"username" : "manager",
+"password" : "manager123",
+"email" : "cris@yahoo.com",
+"phone" : "0214442562"}*/
+    

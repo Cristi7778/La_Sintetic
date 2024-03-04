@@ -10,4 +10,4 @@ export const router = express.Router();
 router.use("/managers", managersRouter);
 router.use("/users", usersRouter);
 router.use("/reservations", reservationsRouter);
-router.use("/picthes", picthesRouter);
+router.use("/pitches", picthesRouter);

@@ -20,7 +20,7 @@ const getById = async(req, res) => {
 
 const create = async (req, res) => {
 	const reservation = req.body;
-	await Reservation.create(pitch);
+	await Reservation.create(reservation);
 
 	res.status(201).send({message:"Reservation was created"});
 };

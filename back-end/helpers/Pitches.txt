@@ -1,0 +1,21 @@
+{
+    "location" :"Strada Valea Ialomitei nr.4",
+    "name" : "Micii fotbalisti",
+    "rate": 300,
+    "imageLink": "",
+    "ManagerUsername": "manager7778"
+}
+{
+    "location" :"Soseaua Progresului nr.14",
+    "name" : "ACS FOTBAL",
+    "rate": 220,
+    "imageLink": "",
+    "ManagerUsername": "manager7778"
+}
+{
+    "location" :"Strada Antiaeriana nr.2",
+    "name" : "Pro Fotbal",
+    "rate": 180,
+    "imageLink": "",
+    "ManagerUsername": "manager"
+}
