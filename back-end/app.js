@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import {router as indexRouter} from './routes/index.js';
 import {synchronizeDatabase} from './models/config.js';
-import { User } from './models/users.js';
+import { User } from './models/Users.js';
 import { Manager } from './models/Managers.js';
 import { Reservation } from './models/Reservations.js';
 import { Pitch } from './models/Pitches.js';

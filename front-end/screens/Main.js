@@ -1,6 +1,6 @@
 import {SafeAreaView,FlatList,TouchableOpacity,Text } from 'react-native';
 import PitchCard from '../components/PitchCard';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 export default function Main({navigation}) {
 
@@ -10,6 +10,29 @@ export default function Main({navigation}) {
     { name: 'TEREN GORJULUI', location: 'DTR3', rate: 200},
   ]);
 
+  const getPitches = async () => {
+    try {
+      const response = await fetch(
+        `http://10.0.2.2:8080/pitches`,
+       
+      );
+      const json = await response.json();
+      if(response.status===200){
+        setPitches(json.records);
+        console.log(setPitches);
+      }
+      else{
+        if(response.status===404){
+          console.log("Pitches not found");
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    getPitches();
+}, [])
   return (
     <SafeAreaView >
       <FlatList data={pitches} renderItem={({ item }) => (

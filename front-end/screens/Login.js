@@ -1,9 +1,44 @@
-import React, { useState } from 'react';
-import {Button, Text, View,StyleSheet, TextInput } from 'react-native';
-
+import React, { useState,useEffect } from 'react';
+import {Button, Text, View,StyleSheet, TextInput,Alert} from 'react-native';
 export default function Login({navigation}) {
   const [username, setUsername] = useState(' ');
   const [password, setPassword] = useState(' ');
+  const [data, setData] = useState(null);
+  const getUserByUsername = async (user) => {
+    try {
+      console.log(`http://10.0.2.2:8080/users/${user}`,)
+      const response = await fetch(
+        `http://10.0.2.2:8080/users/${user}`,
+       
+      );
+      const json = await response.json();
+      if(response.status===200){
+        if(json.user.password===password){
+          navigation.navigate("Pitches");
+        }
+        else{
+          Alert.alert('Log-in error', 'Creditentials do not match', [
+            
+            {text: 'OK',},
+          ]);
+        }
+      }
+      else{
+        if(response.status===404){
+          console.log("user not found");
+          Alert.alert('Log-in error', 'Username was not found', [
+          
+            {text: 'OK',},
+          ]);
+      
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  
   return (  
     <View style={styles.container} >
       <Text style={styles.titleText}>Login Screen</Text>
@@ -20,7 +55,7 @@ export default function Login({navigation}) {
         title="Login"
         onPress={() => {
           console.log(username,password);
-          navigation.navigate("Pitches");
+          getUserByUsername(username);
         }}
       />
     </View>
