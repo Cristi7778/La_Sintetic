@@ -1,14 +1,14 @@
 import React, { useState,useEffect } from 'react';
 import {Button, Text, View,StyleSheet, TextInput,Alert} from 'react-native';
+import {api} from "../api/api";
 export default function Login({navigation}) {
   const [username, setUsername] = useState(' ');
   const [password, setPassword] = useState(' ');
   const [data, setData] = useState(null);
   const getUserByUsername = async (user) => {
     try {
-      console.log(`http://10.0.2.2:8080/users/${user}`,)
       const response = await fetch(
-        `http://10.0.2.2:8080/users/${user}`,
+        `http://192.168.0.101:8080/users/${user}`,
        
       );
       const json = await response.json();
@@ -24,7 +24,24 @@ export default function Login({navigation}) {
         }
       }
       else{
-        if(response.status===404){
+        const response2 = await fetch(
+          `http://192.168.0.101:8080/managers/${user}`,
+         
+        );
+        const json2 = await response2.json();
+        if(response2.status===200){
+          if(json2.manager.password===password){
+            navigation.navigate("My Pitches");
+          }
+          else{
+            Alert.alert('Log-in error', 'Creditentials do not match', [
+              
+              {text: 'OK',},
+            ]);
+          }
+        }
+
+        if(response.status===404&& response2.status===404){
           console.log("user not found");
           Alert.alert('Log-in error', 'Username was not found', [
           

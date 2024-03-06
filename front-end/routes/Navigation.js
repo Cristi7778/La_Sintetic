@@ -4,6 +4,7 @@ import Login from '../screens/Login';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Main from '../screens/Main';
 import Reservations from '../screens/Reservations';
+import MyPicthes  from "../screens/MyPitches";
 import { Ionicons,MaterialCommunityIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -36,8 +37,9 @@ const Drawer=createDrawerNavigator();
 function DrawerGroup(){
     return (
         <Drawer.Navigator>
-            <Drawer.Screen name="Log-out" component={Login }drawerLockMode='locked-close' options={{headerShown:false}}/>
-            <Drawer.Screen name="Pitches" component={TabGroup}/>
+            <Drawer.Screen name="Log-out" component={Login }/>
+            <Drawer.Screen name="Pitches" component={TabGroup} options={{drawerItemStyle: { display: 'none' }}}/>
+            <Drawer.Screen name="My Pitches" component={MyPicthes} options={{drawerItemStyle: { display: 'none' }}}/>
         </Drawer.Navigator>
     )
 }
@@ -70,3 +72,5 @@ const styles = StyleSheet.create({
         width:'100%',
       },
 })
+
+//drawerLockMode='locked-close' options={{headerShown:false}}

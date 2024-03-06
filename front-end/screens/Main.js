@@ -30,9 +30,14 @@ export default function Main({navigation}) {
       console.error(error);
     }
   };
-  useEffect(() => {
-    getPitches();
-}, [])
+useEffect(() => {
+  getPitches();
+}, );
+useEffect(() => {
+  navigation.setOptions({
+    drawerItemStyle: { display: 'auto' }
+  });
+}, [navigation]);
   return (
     <SafeAreaView >
       <FlatList data={pitches} renderItem={({ item }) => (
