@@ -1,20 +1,20 @@
 {
         "Date": "2023-03-05T15:56:26.934Z",
-        "UserUsername": cristi7778,
-        "PitchId": 4
+        "UserUsername": "cristi7778",
+        "PitchId": 1
 }
 {
         "Date": "2023-03-07T00:00:00.934Z",
         "UserUsername": "cristi7778",
-        "PitchId": 5
+        "PitchId": 2
 }
 {
         "Date": "2023-03-06T20:00:00.934Z",
         "UserUsername": "cristi7778",
-        "PitchId": 5
+        "PitchId": 2
 }
 {
         "Date": "2023-03-06T16:00:00.934Z",
         "UserUsername": "cristi7778",
-        "PitchId": 4
+        "PitchId": 3
 }

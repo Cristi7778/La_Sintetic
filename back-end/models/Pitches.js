@@ -20,7 +20,10 @@ export const Pitch = db.define("Pitch", {
 	},
     imageLink: {
         type:DataTypes.STRING
-    }
+    },
+	description:{
+		type:DataTypes.TEXT
+	}
 },
 {
 	indexes: [

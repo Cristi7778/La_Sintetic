@@ -3,19 +3,22 @@
     "name" : "Micii fotbalisti",
     "rate": 300,
     "imageLink": "",
-    "ManagerUsername": "manager7778"
+    "ManagerUsername": "manager7778",
+    "description": "This pitch is very beautiful!"
 }
 {
     "location" :"Soseaua Progresului nr.14",
     "name" : "ACS FOTBAL",
     "rate": 220,
     "imageLink": "",
-    "ManagerUsername": "manager7778"
+    "ManagerUsername": "manager7778",
+    "description": "This pitch is very wonderful!"
 }
 {
     "location" :"Strada Antiaeriana nr.2",
     "name" : "Pro Fotbal",
     "rate": 180,
     "imageLink": "",
-    "ManagerUsername": "manager"
+    "ManagerUsername": "manager",
+    "description": "This pitch is the best!"
 }
