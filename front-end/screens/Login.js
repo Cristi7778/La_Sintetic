@@ -31,7 +31,6 @@ export default function Login({navigation}) {
         const json2 = await response2.json();
         if(response2.status===200){
           if(json2.manager.password===password){
-            console.log(username);
             navigation.navigate('My Pitches', {
               screen: 'Main',
               params: {
@@ -53,7 +52,6 @@ export default function Login({navigation}) {
         if(response.status===404&& response2.status===404){
           console.log("user not found");
           Alert.alert('Log-in error', 'Username was not found', [
-          
             {text: 'OK',},
           ]);
       
