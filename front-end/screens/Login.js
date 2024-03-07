@@ -31,7 +31,16 @@ export default function Login({navigation}) {
         const json2 = await response2.json();
         if(response2.status===200){
           if(json2.manager.password===password){
-            navigation.navigate("My Pitches");
+            console.log(username);
+            navigation.navigate('My Pitches', {
+              screen: 'Main',
+              params: {
+                screen: 'Home',
+                params: {
+                  user:username
+                },
+              },
+            });
           }
           else{
             Alert.alert('Log-in error', 'Creditentials do not match', [

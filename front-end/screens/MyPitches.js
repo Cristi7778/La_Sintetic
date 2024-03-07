@@ -1,8 +1,10 @@
-import {SafeAreaView,FlatList,TouchableOpacity,Text } from 'react-native';
+import {SafeAreaView,FlatList,TouchableOpacity,View,StyleSheet } from 'react-native';
 import PitchCard from '../components/PitchCard';
 import { useState,useEffect } from 'react';
+import { MaterialIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
-export default function MyPitches({navigation}) {
+export default function MyPitches({navigation,route}) {
 
   const [pitches, setPitches] = useState([
     { name: 'PRO-SPORT FOTBAL', location: 'DTR1', rate:200},
@@ -13,13 +15,13 @@ export default function MyPitches({navigation}) {
   const getPitches = async () => {
     try {
       const response = await fetch(
-        `http://10.0.2.2:8080/pitches`,
+        `http://192.168.0.101:8080/pitches`,
        
       );
       const json = await response.json();
       if(response.status===200){
-        setPitches(json.records);
-        console.log(setPitches);
+       const filteredPitches = json.records.filter(entry => entry.ManagerUsername ===route.params.user);
+       setPitches(filteredPitches);
       }
       else{
         if(response.status===404){
@@ -36,10 +38,30 @@ useEffect(() => {
   return (
     <SafeAreaView >
       <FlatList data={pitches} renderItem={({ item }) => (
-        <TouchableOpacity onPress={() =>{navigation.navigate("Edit Pitch",{item});}}>
-          <PitchCard item={item} />
-        </TouchableOpacity>
+        <View style={styles.itemContainer}>
+          <PitchCard  item={item} />
+          <TouchableOpacity onPress={() =>{navigation.navigate("Edit Pitch",{item});}}>
+            <MaterialIcons style={styles.icon} name="edit-note" size={30} color="black" />
+          </TouchableOpacity>
+          <AntDesign style={styles.icon} name="delete" size={30} color="black" />
+        </View>
       )} />
     </SafeAreaView>
   );
 }
+
+const styles=StyleSheet.create(
+  { 
+    itemContainer: {
+    flex:1,
+    flexDirection:'row',
+    
+  },
+
+    icon:{
+      padding:20,
+      textAlign:'center',
+      justifyContent:'center',
+    },
+  
+})

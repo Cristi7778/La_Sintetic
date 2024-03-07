@@ -13,13 +13,13 @@ export default function Main({navigation}) {
   const getPitches = async () => {
     try {
       const response = await fetch(
-        `http://10.0.2.2:8080/pitches`,
+        `http://192.168.0.101:8080/pitches`,
        
       );
       const json = await response.json();
       if(response.status===200){
         setPitches(json.records);
-        console.log(setPitches);
+        
       }
       else{
         if(response.status===404){
