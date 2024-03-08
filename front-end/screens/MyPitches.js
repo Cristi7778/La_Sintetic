@@ -1,4 +1,4 @@
-import {SafeAreaView,FlatList,TouchableOpacity,View,StyleSheet, Alert } from 'react-native';
+import {SafeAreaView,FlatList,TouchableOpacity,View,StyleSheet, Alert,Button } from 'react-native';
 import PitchCard from '../components/PitchCard';
 import { useState,useEffect } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -37,10 +37,11 @@ useEffect(() => {
 }, );
   return (
     <SafeAreaView >
+      <Button color="green" title="Add Pitch" onPress={()=>{navigation.navigate("Edit Pitch",{item:{"ManagerUsername":route.params.user, "description": "", "imageLink": "", "location": "", "name": "", "rate": ""},action:'ADD'});}}/>
       <FlatList data={pitches} renderItem={({ item }) => (
         <View style={styles.itemContainer}>
           <PitchCard  item={item} />
-          <TouchableOpacity onPress={() =>{navigation.navigate("Edit Pitch",{item});}}>
+          <TouchableOpacity onPress={() =>{navigation.navigate("Edit Pitch",{item,action:"EDIT"});}}>
             <MaterialIcons style={styles.icon} name="edit-note" size={30} color="black" />
           </TouchableOpacity>
           <TouchableOpacity onPress={()=> Alert.alert('Confirm deletion', `Are you sure you want to delete this pitch?`,
@@ -69,4 +70,4 @@ const styles=StyleSheet.create(
       justifyContent:'center',
     },
   
-})
+});

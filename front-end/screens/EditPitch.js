@@ -10,10 +10,10 @@ export default function EditPitch({navigation,route}) {
   const [description, setDescription] = useState(item.description);
   return (
     <SafeAreaView >
-      <TextInput name="Name"  defaultValue={item.name} onChangeText={(value)=>setName(value)}/>
-      <TextInput name="Location"  defaultValue={item.location} onChangeText={(value)=>setLocation(value)}/>
-      <TextInput name="Rate"  defaultValue={item.rate.toString()} keyboardType='numeric' onChangeText={(value)=>setRate(value)}/>
-      <TextInput name="Description"  defaultValue={item.description} onChangeText={(value)=>setDescription(value)}/>
+      <TextInput name="Name"  placeholder="Pitch Name" defaultValue={item.name} onChangeText={(value)=>setName(value)}/>
+      <TextInput name="Location" placeholder="Pitch Location" defaultValue={item.location} onChangeText={(value)=>setLocation(value)}/>
+      <TextInput name="Rate"  placeholder="Pitch Rate" defaultValue={item.rate.toString()} keyboardType='numeric' onChangeText={(value)=>setRate(value)}/>
+      <TextInput name="Description" placeholder="Pitch Description" defaultValue={item.description} onChangeText={(value)=>setDescription(value)}/>
       <Button color="red" title="Cancel" onPress={()=>{
         navigation.pop();
       }}/>
@@ -27,8 +27,17 @@ export default function EditPitch({navigation,route}) {
                   if(description.length>0){
                     item.description=description;
                     console.log(item);
-                    fetch(`http://192.168.0.101:8080/pitches/${item.id}`, {method: "PUT",body: JSON.stringify(item),headers: 
-                    {"Content-type": "application/json; charset=UTF-8"}});
+                    console.log(route.params);
+                    if(route.params.action==="EDIT"){
+                      fetch(`http://192.168.0.101:8080/pitches/${item.id}`, {method: "PUT",body: JSON.stringify(item),headers: 
+                      {"Content-type": "application/json; charset=UTF-8"}});
+                    }
+                    else{
+                      if(route.params.action==="ADD"){
+                        fetch(`http://192.168.0.101:8080/pitches/`, {method: "POST",body: JSON.stringify(item),headers: 
+                        {"Content-type": "application/json; charset=UTF-8"}});
+                      }
+                    }
                     navigation.pop();
                   }
                   else{
