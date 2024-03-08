@@ -1,10 +1,10 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,useContext } from 'react';
 import {Button, Text, View,StyleSheet, TextInput,Alert} from 'react-native';
-import {api} from "../api/api";
+import { UserContext } from '../contexts/UserContext';
 export default function Login({navigation}) {
   const [username, setUsername] = useState(' ');
   const [password, setPassword] = useState(' ');
-  const [data, setData] = useState(null);
+  const {setUser}=useContext(UserContext);
   const getUserByUsername = async (user) => {
     try {
       const response = await fetch(
@@ -68,7 +68,8 @@ export default function Login({navigation}) {
       <Text style={styles.titleText}>Login Screen</Text>
       <TextInput style={styles.input}
       placeholder='Your username'
-      onChangeText={(value) => setUsername(value)}
+      onChangeText={(value) => {setUsername(value);
+      setUser(value);}}
       />
       <TextInput style={styles.input}
       placeholder='Your password'

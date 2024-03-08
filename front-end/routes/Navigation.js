@@ -11,6 +11,11 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AddReservations from '../screens/AddReservation';
 import EditPitch from '../screens/EditPitch';
+import {UserContext} from '../contexts/UserContext';
+import { useState } from 'react';
+
+
+
 const Tab=createBottomTabNavigator();
 function TabGroup(){
   return (
@@ -88,10 +93,13 @@ function ManagerStackGroup(){
     )
 }
 export default function Navigation(){
+    const [user,setUser]=useState('user');
     return (
-        <NavigationContainer>
-            <DrawerGroup/>
-        </NavigationContainer>
+        <UserContext.Provider value={{user,setUser}}>
+            <NavigationContainer>
+                <DrawerGroup/>
+            </NavigationContainer>
+        </UserContext.Provider>
     )
 }
 
