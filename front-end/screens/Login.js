@@ -83,6 +83,12 @@ export default function Login({navigation}) {
           getUserByUsername(username);
         }}
       />
+      <Button color='teal'
+        title="Register"
+        onPress={() => {
+          navigation.navigate('Register');
+        }}
+      />
     </View>
   );
 }

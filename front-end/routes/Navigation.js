@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import Login from '../screens/Login';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Main from '../screens/Main';
+import Register from '../screens/Register';
 import UserReservations from '../screens/UserReservations';
 import ManagerReservations from '../screens/ManagerReservations';
 import MyPitches  from "../screens/MyPitches";
@@ -44,7 +45,7 @@ const Drawer=createDrawerNavigator();
 function DrawerGroup(){
     return (
         <Drawer.Navigator>
-            <Drawer.Screen name="Log-out" component={Login} drawerLockMode='locked-close' options={{headerShown:false}}/>
+            <Drawer.Screen name="Log-out" component={LoginStackGroup} drawerLockMode='locked-close' options={{headerShown:false}}/>
             <Drawer.Screen name="Pitches" component={TabGroup} options={{drawerItemStyle: { display: 'none' }}}/>
             <Drawer.Screen name="My Pitches" component={ManagerTabGroup} options={{drawerItemStyle: { display: 'none' }}}/>
         </Drawer.Navigator>
@@ -90,6 +91,15 @@ function ManagerStackGroup(){
             <ManagerStack.Screen name="Home" component={MyPitches} options={{headerShown:false}}/>
             <ManagerStack.Screen name="Edit Pitch" component={EditPitch}/>
         </ManagerStack.Navigator>
+    )
+}
+const LoginStack=createNativeStackNavigator();
+function LoginStackGroup(){
+    return (
+        <LoginStack.Navigator>
+            <ManagerStack.Screen name="Login" component={Login} options={{headerShown:false}}/>
+            <ManagerStack.Screen name="Register" component={Register}/>
+        </LoginStack.Navigator>
     )
 }
 export default function Navigation(){
