@@ -9,7 +9,7 @@ export default function UserReservations() {
   const getReservations = async () => {
     try {
       const response = await fetch(
-        `http://192.168.0.101:8080/reservations`,
+        `http://192.168.0.100:8080/reservations`,
        
       );
       const json = await response.json();
@@ -37,7 +37,7 @@ useEffect(() => {
         <View style={styles.itemContainer}>
           <ReservationCard item={item} />
           <TouchableOpacity onPress={()=> Alert.alert('Confirm deletion', `Are you sure you want to delete this reservation?`,
-           [{text: 'YES', onPress: () => fetch(`http://192.168.0.101:8080/reservations/${item.ID}`, {method: "DELETE",headers: 
+           [{text: 'YES', onPress: () => fetch(`http://192.168.0.100:8080/reservations/${item.ID}`, {method: "DELETE",headers: 
            {"Content-type": "application/json; charset=UTF-8"}})},
             {text:'NO'}])}>
             <MaterialCommunityIcons style={styles.icon} name="cancel" size={24} color="red" />

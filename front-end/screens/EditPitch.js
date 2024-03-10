@@ -29,12 +29,12 @@ export default function EditPitch({navigation,route}) {
                     console.log(item);
                     console.log(route.params);
                     if(route.params.action==="EDIT"){
-                      fetch(`http://192.168.0.101:8080/pitches/${item.id}`, {method: "PUT",body: JSON.stringify(item),headers: 
+                      fetch(`http://192.168.0.100:8080/pitches/${item.id}`, {method: "PUT",body: JSON.stringify(item),headers: 
                       {"Content-type": "application/json; charset=UTF-8"}});
                     }
                     else{
                       if(route.params.action==="ADD"){
-                        fetch(`http://192.168.0.101:8080/pitches/`, {method: "POST",body: JSON.stringify(item),headers: 
+                        fetch(`http://192.168.0.100:8080/pitches/`, {method: "POST",body: JSON.stringify(item),headers: 
                         {"Content-type": "application/json; charset=UTF-8"}});
                       }
                     }

@@ -1,11 +1,11 @@
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import {React,useMemo,  useState } from 'react';
 import * as Yup from 'yup';
 import RadioGroup from 'react-native-radio-buttons-group';
 
 const signUpSchema = Yup.object().shape({
   username: Yup.string().min(6,'Username must have at least 6 characters').required('Username cannot be invalid'),
-  email: Yup.string().email('Email is Invalid').required('Email Cannot Be Empty').min(10,'Email must have at least 10 characters'),
+  email: Yup.string().required('Email Cannot Be Empty').min(10,'Email must have at least 10 characters'),
   password: Yup.string().min(6, 'Password Must have a minimum of 6 Characters').required('Password Cannot Be Empty'),
   confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Please Enter Password Again!'),
   phone: Yup.number().min(10,'Phone number must haved 10 digits').required('Phone number cannot be empty'),
@@ -24,7 +24,7 @@ export default function Register() {
       {
           id: '1', 
           label: 'I want to look for pitches to book',
-          value: 'user'
+          value: 'user',
       },
       {
           id: '2',
@@ -51,6 +51,68 @@ export default function Register() {
       }
     }
   };
+  const registerUser = async () =>{
+    const body={"username" : username,
+    "password" : password,
+    "email" : email,
+    "phone" : phone}
+    try {
+      const response = await fetch(
+        `http://192.168.0.100:8080/users/${username}`,
+      );
+      const json = await response.json();
+      if(response.status===404 && json.message==='user not found.'){
+        const response2 = await fetch(
+            `http://192.168.0.100:8080/managers/${username}`,
+          );
+          const json2 = await response2.json();
+          if(json2.status===404 && json.message==='manager not found.'){
+          await fetch(`http://192.168.0.100:8080/users`, {method: "POST",body: JSON.stringify(body),headers: 
+                        {"Content-type": "application/json; charset=UTF-8"}});
+          }
+          else{
+            Alert.alert("Register error","Username is already in use.");
+          }
+      }
+      else{
+        Alert.alert("Register error","Username is already in use.");
+      }
+    }
+    catch (error) {
+      console.error(error);
+    }
+  };
+  const registerManger = async () =>{
+    const body={"username" : username,
+    "password" : password,
+    "email" : email,
+    "phone" : phone}
+    try {
+      const response = await fetch(
+        `http://192.168.0.100:8080/managers/${username}`,
+      );
+      const json = await response.json();
+      if(response.status===404 && json.message==='manager not found.'){
+        const response2 = await fetch(
+            `http://192.168.0.100:8080/users/${username}`,
+          );
+          const json2 = await response2.json();
+          if(json2.status===404 && json.message==='user not found.'){
+          await fetch(`http://192.168.0.100:8080/managers`, {method: "POST",body: JSON.stringify(body),headers: 
+                        {"Content-type": "application/json; charset=UTF-8"}});
+          }
+          else{
+            Alert.alert("Register error","Username is already in use.");
+          }
+      }
+      else{
+        Alert.alert("Register error","Username is already in use.");
+      }
+    }
+    catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <View style={styles.centered}>
 
@@ -74,12 +136,18 @@ export default function Register() {
             radioButtons={radioButtons} 
             onPress={setSelectedId}
             selectedId={selectedId}
-            />
-
-      
-      
-      <Button title="Register" onPress={signUp} />
-      {success && <Text style={styles.textSuccess}>Success!</Text>}
+      />
+      <Button title="Register" onPress={()=>{signUp();
+      if(success){
+        console.log(selectedId);
+        if(selectedId==='1'){
+          registerUser();
+        }
+        else if(selectedId==='2'){
+          registerManger();
+        }
+      }
+      }} />
     </View>
   );
 };

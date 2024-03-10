@@ -8,7 +8,7 @@ export default function Login({navigation}) {
   const getUserByUsername = async (user) => {
     try {
       const response = await fetch(
-        `http://192.168.0.101:8080/users/${user}`,
+        `http://192.168.0.100:8080/users/${user}`,
        
       );
       const json = await response.json();
@@ -25,7 +25,7 @@ export default function Login({navigation}) {
       }
       else{
         const response2 = await fetch(
-          `http://192.168.0.101:8080/managers/${user}`,
+          `http://192.168.0.100:8080/managers/${user}`,
          
         );
         const json2 = await response2.json();
