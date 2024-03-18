@@ -8,7 +8,6 @@ export default function Login({navigation}) {
   const {setUser}=useContext(UserContext);
   const getUserByUsername = async (user) => {
     try {
-      console.log(`${ip}:8080/users/${user}`);
       const response = await fetch(
         `${ip}:8080/users/${user}`,
        

@@ -1,10 +1,11 @@
 import {SafeAreaView,FlatList, Text, View,TouchableOpacity,StyleSheet} from 'react-native';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import ip from '../global/ip';
 
 export default function AddReservations({route}) {
-  const [availableHours,setAvailableHours]=useState([{hour:'00:00'},{hour:'02:00'},{hour:'04:00'},{hour:'06:00'}
-  ,{hour:'08:00'},{hour:'10:00'},{hour:'12:00'},{hour:'14:00'},{hour:'16:00'},{hour:'18:00'},{hour:'20:00'},{hour:'22:00'}]);
+  const [availableHours,setAvailableHours]=useState(['00:00','02:00','04:00','06:00'
+  ,'08:00','10:00','12:00','14:00','16:00','18:00','20:00','22:00']);
   const [listLength,setListLength]=useState(Math.ceil(availableHours.length/3))
   const [date, setDate] = useState(new Date());
   const [show,setShow]=useState(false);
@@ -13,7 +14,43 @@ export default function AddReservations({route}) {
     setDate(selectedDate);
 
   };
-  console.log(listLength);
+  const getReservations = async () => {
+    try {
+      const response = await fetch(
+        `${ip}:8080/reservations`,
+       
+      );
+      const json = await response.json();
+      if(response.status===200){
+        const filteredReservations = json.records.filter(entry =>{
+          return entry.PitchId===route.params.item.id && (new Date(entry.Date)).toISOString().slice(0,10)===date.toISOString().slice(0,10);
+      })
+      const busyHours=new Array();
+      for (var i = 0; i< filteredReservations.length; i++) {
+        busyHours.push(filteredReservations[i].Date.slice(11,16));
+    }
+      setAvailableHours(subtractArrays(['00:00','02:00','04:00','06:00'
+      ,'08:00','10:00','12:00','14:00','16:00','18:00','20:00','22:00'],busyHours));
+    }
+      else{
+        if(response.status===404){
+          console.log("Reservations not found");
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  function subtractArrays(arr1, arr2) {
+    return arr1.filter(item =>{ 
+       return !arr2.includes(item)});
+}
+  useEffect(() => {
+    setListLength(Math.ceil(availableHours.length/3));
+  }, [availableHours]);
+  useEffect(()=>{
+    getReservations();
+  })
   return (
     <SafeAreaView >
       <View>
@@ -38,7 +75,7 @@ export default function AddReservations({route}) {
       showsHorizontalScrollIndicator={false}
       data={availableHours} renderItem={({ item }) => (
         <TouchableOpacity >
-          <Text style={styles.hourCard}>{item.hour}</Text>
+          <Text style={styles.hourCard}>{item}</Text>
         </TouchableOpacity>
       )} />
     </View>
