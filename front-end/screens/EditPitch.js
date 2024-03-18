@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {SafeAreaView, Text,TextInput, View,Button, Alert} from 'react-native';
-
+import ip from '../global/ip';
 
 export default function EditPitch({navigation,route}) {
   const [item, setItem] = useState(route.params.item);
@@ -29,12 +29,12 @@ export default function EditPitch({navigation,route}) {
                     console.log(item);
                     console.log(route.params);
                     if(route.params.action==="EDIT"){
-                      fetch(`http://192.168.0.100:8080/pitches/${item.id}`, {method: "PUT",body: JSON.stringify(item),headers: 
+                      fetch(`${ip}:8080/pitches/${item.id}`, {method: "PUT",body: JSON.stringify(item),headers: 
                       {"Content-type": "application/json; charset=UTF-8"}});
                     }
                     else{
                       if(route.params.action==="ADD"){
-                        fetch(`http://192.168.0.100:8080/pitches/`, {method: "POST",body: JSON.stringify(item),headers: 
+                        fetch(`${ip}:8080/pitches/`, {method: "POST",body: JSON.stringify(item),headers: 
                         {"Content-type": "application/json; charset=UTF-8"}});
                       }
                     }

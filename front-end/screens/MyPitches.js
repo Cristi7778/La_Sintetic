@@ -3,6 +3,7 @@ import PitchCard from '../components/PitchCard';
 import { useState,useEffect } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import ip from '../global/ip';
 
 export default function MyPitches({navigation,route}) {
 
@@ -15,7 +16,7 @@ export default function MyPitches({navigation,route}) {
   const getPitches = async () => {
     try {
       const response = await fetch(
-        `http://192.168.0.100:8080/pitches`,
+        `${ip}:8080/pitches`,
        
       );
       const json = await response.json();
@@ -45,7 +46,7 @@ useEffect(() => {
             <MaterialIcons style={styles.icon} name="edit-note" size={30} color="black" />
           </TouchableOpacity>
           <TouchableOpacity onPress={()=> Alert.alert('Confirm deletion', `Are you sure you want to delete this pitch?`,
-           [{text: 'YES', onPress: () => fetch(`http://192.168.0.100:8080/pitches/${item.id}`, {method: "DELETE",headers: 
+           [{text: 'YES', onPress: () => fetch(`${ip}:8080/pitches/${item.id}`, {method: "DELETE",headers: 
            {"Content-type": "application/json; charset=UTF-8"}})},
             {text:'NO'}])}>
             <AntDesign style={styles.icon} name="delete" size={30} color="black" />

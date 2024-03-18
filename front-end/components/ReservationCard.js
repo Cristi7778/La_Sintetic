@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View } from 'react-native';
 import {globalStyles} from '../styles/globalStyles';
 import { useEffect, useState } from 'react';
+import ip from '../global/ip';
 
 export default function ReservationCard({item}){
     const date=item.Date.substring(0, 10);
@@ -10,7 +11,7 @@ export default function ReservationCard({item}){
     const getDetails = async () => {
         try {
           const response = await fetch(
-            `http://192.168.0.100:8080/pitches/${item.PitchId}`,
+            `${id}:8080/pitches/${item.PitchId}`,
            
           );
           const json = await response.json();

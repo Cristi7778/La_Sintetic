@@ -1,14 +1,16 @@
 import React, { useState,useEffect,useContext } from 'react';
 import {Button, Text, View,StyleSheet, TextInput,Alert} from 'react-native';
 import { UserContext } from '../contexts/UserContext';
+import ip from '../global/ip';
 export default function Login({navigation}) {
   const [username, setUsername] = useState(' ');
   const [password, setPassword] = useState(' ');
   const {setUser}=useContext(UserContext);
   const getUserByUsername = async (user) => {
     try {
+      console.log(`${ip}:8080/users/${user}`);
       const response = await fetch(
-        `http://192.168.0.100:8080/users/${user}`,
+        `${ip}:8080/users/${user}`,
        
       );
       const json = await response.json();
@@ -25,7 +27,7 @@ export default function Login({navigation}) {
       }
       else{
         const response2 = await fetch(
-          `http://192.168.0.100:8080/managers/${user}`,
+          `${ip}:8080/managers/${user}`,
          
         );
         const json2 = await response2.json();

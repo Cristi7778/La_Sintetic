@@ -3,13 +3,14 @@ import { UserContext } from '../contexts/UserContext';
 import { useContext, useState,useEffect } from 'react';
 import ReservationCard from '../components/ReservationCard';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import ip from '../global/ip';
 export default function UserReservations() {
   const {user}=useContext(UserContext);
   const [reservations,setReservations]=useState();
   const getReservations = async () => {
     try {
       const response = await fetch(
-        `http://192.168.0.100:8080/reservations`,
+        `${ip}:8080/reservations`,
        
       );
       const json = await response.json();
@@ -37,7 +38,7 @@ useEffect(() => {
         <View style={styles.itemContainer}>
           <ReservationCard item={item} />
           <TouchableOpacity onPress={()=> Alert.alert('Confirm deletion', `Are you sure you want to delete this reservation?`,
-           [{text: 'YES', onPress: () => fetch(`http://192.168.0.100:8080/reservations/${item.ID}`, {method: "DELETE",headers: 
+           [{text: 'YES', onPress: () => fetch(`${ip}:8080/reservations/${item.ID}`, {method: "DELETE",headers: 
            {"Content-type": "application/json; charset=UTF-8"}})},
             {text:'NO'}])}>
             <MaterialCommunityIcons style={styles.icon} name="cancel" size={24} color="red" />

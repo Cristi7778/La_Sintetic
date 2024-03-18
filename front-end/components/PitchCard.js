@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View } from 'react-native';
-import {globalStyles} from '../styles/globalStyles';
+import {globalStyles} from '../global/globalStyles';
 import { MaterialIcons } from '@expo/vector-icons';
 
 export default function PitchCard({item}){

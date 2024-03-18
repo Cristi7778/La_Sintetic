@@ -2,6 +2,7 @@ import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import {React,useMemo,  useState } from 'react';
 import * as Yup from 'yup';
 import RadioGroup from 'react-native-radio-buttons-group';
+import ip from '../global/ip';
 
 const signUpSchema = Yup.object().shape({
   username: Yup.string().min(6,'Username must have at least 6 characters').required('Username cannot be invalid'),
@@ -58,16 +59,16 @@ export default function Register() {
     "phone" : phone}
     try {
       const response = await fetch(
-        `http://192.168.0.100:8080/users/${username}`,
+        `${ip}:8080/users/${username}`,
       );
       const json = await response.json();
       if(response.status===404 && json.message==='user not found.'){
         const response2 = await fetch(
-            `http://192.168.0.100:8080/managers/${username}`,
+            `${ip}:8080/managers/${username}`,
           );
           const json2 = await response2.json();
           if(json2.status===404 && json.message==='manager not found.'){
-          await fetch(`http://192.168.0.100:8080/users`, {method: "POST",body: JSON.stringify(body),headers: 
+          await fetch(`${ip}:8080/users`, {method: "POST",body: JSON.stringify(body),headers: 
                         {"Content-type": "application/json; charset=UTF-8"}});
           }
           else{
@@ -89,16 +90,16 @@ export default function Register() {
     "phone" : phone}
     try {
       const response = await fetch(
-        `http://192.168.0.100:8080/managers/${username}`,
+        `${ip}:8080/managers/${username}`,
       );
       const json = await response.json();
       if(response.status===404 && json.message==='manager not found.'){
         const response2 = await fetch(
-            `http://192.168.0.100:8080/users/${username}`,
+            `${ip}:8080/users/${username}`,
           );
           const json2 = await response2.json();
           if(json2.status===404 && json.message==='user not found.'){
-          await fetch(`http://192.168.0.100:8080/managers`, {method: "POST",body: JSON.stringify(body),headers: 
+          await fetch(`${ip}:8080/managers`, {method: "POST",body: JSON.stringify(body),headers: 
                         {"Content-type": "application/json; charset=UTF-8"}});
           }
           else{
