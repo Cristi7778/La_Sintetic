@@ -12,9 +12,12 @@ export default function AddReservations({route}) {
   const [show,setShow]=useState(false);
   const {user}=useContext(UserContext);
   const onChange = (e, selectedDate) => {
-    setShow(false);
     setDate(selectedDate);
+    setShow(false);
 
+  };
+  const openPicker = () => {
+    setShow(true);
   };
   const getReservations = async () => {
     try {
@@ -47,35 +50,28 @@ export default function AddReservations({route}) {
     return arr1.filter(item =>{ 
        return !arr2.includes(item)});
 }
-function newReservation(item){
-  Alert.alert('Confirm reservation', `Do you want to create a reservation for ${route.params.item.name} located at
-   ${route.params.item.location} on ${date},${item}?`,
-  [{text: 'YES', },
-   {text:'NO'}])
-}
   useEffect(() => {
     setListLength(Math.ceil(availableHours.length/3));
   }, [availableHours]);
   useEffect(()=>{
     getReservations();
-  })
+  },[date])
   
   return (
     <SafeAreaView >
       <View>
       <Text>{route.params.item.name}</Text>
       </View>
+      <TouchableOpacity onPress={openPicker}>
+      <Text>{date.toDateString()}</Text>
+      </TouchableOpacity>
       <View>
       {show &&<DateTimePicker
         value={date}
         mode={"date"}
-        is24Hour={true}
         onChange={onChange}
       />
       }
-      <TouchableOpacity onPress={()=>{setShow(true)}}>
-      <Text>{date.toDateString()}</Text>
-      </TouchableOpacity>
       </View>
       <View >
       <FlatList contentContainerStyle={{alignSelf: 'flex-start'}}
@@ -91,7 +87,6 @@ function newReservation(item){
               "Date" : `${date.toISOString().slice(0,11)}${item}${date.toISOString().slice(16,)}`,
               "UserUsername" : user,
               "PitchId" : route.params.item.id}
-              console.log(body);
             await fetch(`${ip}:8080/reservations`, {method: "POST",body: JSON.stringify(body),headers: 
                        {"Content-type": "application/json; charset=UTF-8"}});
           }},
