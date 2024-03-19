@@ -11,7 +11,7 @@ export default function ReservationCard({item}){
     const getDetails = async () => {
         try {
           const response = await fetch(
-            `${id}:8080/pitches/${item.PitchId}`,
+            `${ip}:8080/pitches/${item.PitchId}`,
            
           );
           const json = await response.json();

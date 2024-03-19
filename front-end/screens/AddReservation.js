@@ -1,7 +1,8 @@
-import {SafeAreaView,FlatList, Text, View,TouchableOpacity,StyleSheet} from 'react-native';
-import React, { useState,useEffect } from 'react';
+import {SafeAreaView,Alert,FlatList, Text, View,TouchableOpacity,StyleSheet} from 'react-native';
+import React, { useState,useEffect,useContext } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import ip from '../global/ip';
+import { UserContext } from '../contexts/UserContext';
 
 export default function AddReservations({route}) {
   const [availableHours,setAvailableHours]=useState(['00:00','02:00','04:00','06:00'
@@ -9,6 +10,7 @@ export default function AddReservations({route}) {
   const [listLength,setListLength]=useState(Math.ceil(availableHours.length/3))
   const [date, setDate] = useState(new Date());
   const [show,setShow]=useState(false);
+  const {user}=useContext(UserContext);
   const onChange = (e, selectedDate) => {
     setShow(false);
     setDate(selectedDate);
@@ -45,12 +47,19 @@ export default function AddReservations({route}) {
     return arr1.filter(item =>{ 
        return !arr2.includes(item)});
 }
+function newReservation(item){
+  Alert.alert('Confirm reservation', `Do you want to create a reservation for ${route.params.item.name} located at
+   ${route.params.item.location} on ${date},${item}?`,
+  [{text: 'YES', },
+   {text:'NO'}])
+}
   useEffect(() => {
     setListLength(Math.ceil(availableHours.length/3));
   }, [availableHours]);
   useEffect(()=>{
     getReservations();
   })
+  
   return (
     <SafeAreaView >
       <View>
@@ -70,11 +79,24 @@ export default function AddReservations({route}) {
       </View>
       <View >
       <FlatList contentContainerStyle={{alignSelf: 'flex-start'}}
-      numColumns={listLength}
+      numColumns='3'
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
       data={availableHours} renderItem={({ item }) => (
-        <TouchableOpacity >
+        <TouchableOpacity onPress={()=>{
+          Alert.alert('Confirm reservation', `Do you want to create a reservation for ${route.params.item.name} located at
+           ${route.params.item.location} at ${item},${date.toDateString()}?`,
+          [{text: 'YES',onPress: async ()=>{
+            const body={
+              "Date" : `${date.toISOString().slice(0,11)}${item}${date.toISOString().slice(16,)}`,
+              "UserUsername" : user,
+              "PitchId" : route.params.item.id}
+              console.log(body);
+            await fetch(`${ip}:8080/reservations`, {method: "POST",body: JSON.stringify(body),headers: 
+                       {"Content-type": "application/json; charset=UTF-8"}});
+          }},
+           {text:'NO'}])
+        }}>
           <Text style={styles.hourCard}>{item}</Text>
         </TouchableOpacity>
       )} />
