@@ -1,4 +1,4 @@
-import { Modal, TouchableOpacity, View } from "react-native";
+import { Modal, TouchableOpacity, View,StyleSheet} from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker'
 import { globalStyles } from '../global/globalStyles';
@@ -40,16 +40,16 @@ export default function UploadImageModal({modalOpen,setImage,setModalOpen}){
       }
     return (
         <View>
-            <Modal visible={modalOpen}>
-                <View>
-                    <TouchableOpacity onPress={uploadImage}>
-                        <MaterialIcons name="camera-alt" size={40} color="black" />
+            <Modal  transparent={true} visible={modalOpen}>
+                <View style={styles.container}>
+                    <TouchableOpacity style={styles.icons} onPress={uploadImage}>
+                        <MaterialIcons  name="camera-alt" size={40} color="black" />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=>{uploadImage("gallery")}}>
                         
                         <MaterialIcons name="attach-file" size={40} color="black" />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>{setModalOpen(false)}}>
+                    <TouchableOpacity style={styles.icons} onPress={()=>{setModalOpen(false)}}>
                         <MaterialIcons name="cancel" size={40} color="black" />
                     </TouchableOpacity>
                 </View>
@@ -57,3 +57,19 @@ export default function UploadImageModal({modalOpen,setImage,setModalOpen}){
         </View>
     )
 }
+const styles=StyleSheet.create({
+  container:{
+    height:100,
+    width:200,
+    backgroundColor:'#abddfc',
+    alignItems:'center',
+    alignContent:'center',
+    flexDirection:'row',
+    justifyContent:'center',
+    borderColor:'grey',
+    borderWidth:3
+  },
+  icons:{
+    margin:8
+  }
+})
