@@ -20,4 +20,10 @@ export const globalStyles = StyleSheet.create({
     fontSize: 18,
     borderRadius: 6,
   },
+  image:{
+    width:150,
+    height:150,
+    borderWidth:5,
+    backgroundColor:'blue',
+  }
 });
