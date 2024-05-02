@@ -4,6 +4,7 @@ import { UserContext } from '../contexts/UserContext';
 import ip from '../global/ip';
 import { globalStyles } from '../global/globalStyles';
 import UploadImageModal from '../components/UploadImageModal';
+import LocationPicker from '../components/LocationPicker';
 export default function Login({navigation}) {
   const [username, setUsername] = useState(' ');
   const [password, setPassword] = useState(' ');
