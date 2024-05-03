@@ -1,10 +1,11 @@
 import { React, useState } from 'react'
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Image,Dimensions, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import MapView from 'react-native-maps'
 import marker from "../assets/locationMarker.png"
 
-const latitudeDelta = 0.025
-const longitudeDelta = 0.025
+const latitudeDelta = 0.025;
+const longitudeDelta = 0.025;
+const windowWidth = Dimensions.get('window').width;
 export default function LocationPicker(){
     const [region, setRegion] = useState({
         latitudeDelta,
@@ -12,34 +13,47 @@ export default function LocationPicker(){
         latitude: 25.1948475,
         longitude: 55.2682899
     });
+    const [mapReady,setMapReady]=useState(false);
 
     onRegionChange = region => {
         setRegion(region);
+        console.log(region.latitude,region.longitude);
     };
+    onMapLayout = () => {
+        setMapReady(true);
+      };
     return (
-        <View style={styles.map}>
+        <View style={styles.container}>
             <MapView
                 style={styles.map}
                 initialRegion={region}
                 onRegionChangeComplete={onRegionChange}
+                onMapReady={onMapLayout}
             />
+            {mapReady &&
             <View style={styles.markerFixed}>
                 <Image style={styles.marker} source={marker} />
-            </View>
-            <SafeAreaView style={styles.footer}>
-                <Text style={styles.region}>{JSON.stringify(region, null, 2)}</Text>
-            </SafeAreaView>
+            </View> }
         </View>
     )
 }
 const styles = StyleSheet.create({
     map: {
-        flex: 1
+        width:windowWidth*2/3,
+        height:windowWidth*2/3,
+    },
+    container:{
+        width:windowWidth*2/3,
+        height:windowWidth*2/3,
+        marginTop:windowWidth/6,
+        marginBottom:windowWidth/6,
+        marginLeft:windowWidth/6,
+        marginRight:windowWidth/6,
     },
     markerFixed: {
         left: '50%',
         marginLeft: -24,
-        marginTop: -48,
+        marginTop: -44,
         position: 'absolute',
         top: '50%'
     },

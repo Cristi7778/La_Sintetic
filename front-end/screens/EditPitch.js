@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {SafeAreaView, Text,TextInput, View,Button, Alert} from 'react-native';
 import ip from '../global/ip';
+import LocationPicker from '../components/LocationPicker';
 
 export default function EditPitch({navigation,route}) {
   const [item, setItem] = useState(route.params.item);
@@ -14,6 +15,7 @@ export default function EditPitch({navigation,route}) {
       <TextInput name="Location" placeholder="Pitch Location" defaultValue={item.location} onChangeText={(value)=>setLocation(value)}/>
       <TextInput name="Rate"  placeholder="Pitch Rate" defaultValue={item.rate.toString()} keyboardType='numeric' onChangeText={(value)=>setRate(value)}/>
       <TextInput name="Description" placeholder="Pitch Description" defaultValue={item.description} onChangeText={(value)=>setDescription(value)}/>
+      <LocationPicker/>
       <Button color="red" title="Cancel" onPress={()=>{
         navigation.pop();
       }}/>
