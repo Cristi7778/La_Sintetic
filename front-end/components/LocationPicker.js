@@ -6,17 +6,19 @@ import marker from "../assets/locationMarker.png"
 const latitudeDelta = 0.025;
 const longitudeDelta = 0.025;
 const windowWidth = Dimensions.get('window').width;
-export default function LocationPicker(){
+export default function LocationPicker({lat,long,setLat,setLong}){
     const [region, setRegion] = useState({
         latitudeDelta,
         longitudeDelta,
-        latitude: 25.1948475,
-        longitude: 55.2682899
+        latitude: lat,
+        longitude: long,
     });
     const [mapReady,setMapReady]=useState(false);
 
     onRegionChange = region => {
         setRegion(region);
+        setLat(region.latitude);
+        setLong(region.longitude);
         console.log(region.latitude,region.longitude);
     };
     onMapLayout = () => {
@@ -46,7 +48,6 @@ const styles = StyleSheet.create({
         width:windowWidth*2/3,
         height:windowWidth*2/3,
         marginTop:windowWidth/6,
-        marginBottom:windowWidth/6,
         marginLeft:windowWidth/6,
         marginRight:windowWidth/6,
     },

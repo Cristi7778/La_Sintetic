@@ -9,13 +9,15 @@ export default function EditPitch({navigation,route}) {
   const [location, setLocation] = useState(item.location);
   const [rate, setRate] = useState(item.rate);
   const [description, setDescription] = useState(item.description);
+  const [latitude,setLatitude]=useState(item.latitude);
+  const [longitude,setLongitude]=useState(item.longitude);
   return (
-    <SafeAreaView >
+    <SafeAreaView>
       <TextInput name="Name"  placeholder="Pitch Name" defaultValue={item.name} onChangeText={(value)=>setName(value)}/>
       <TextInput name="Location" placeholder="Pitch Location" defaultValue={item.location} onChangeText={(value)=>setLocation(value)}/>
       <TextInput name="Rate"  placeholder="Pitch Rate" defaultValue={item.rate.toString()} keyboardType='numeric' onChangeText={(value)=>setRate(value)}/>
       <TextInput name="Description" placeholder="Pitch Description" defaultValue={item.description} onChangeText={(value)=>setDescription(value)}/>
-      <LocationPicker/>
+      <LocationPicker lat={latitude} long={longitude} setLat={setLatitude} setLong={setLongitude}/>
       <Button color="red" title="Cancel" onPress={()=>{
         navigation.pop();
       }}/>
@@ -30,7 +32,11 @@ export default function EditPitch({navigation,route}) {
                     item.description=description;
                     console.log(item);
                     console.log(route.params);
+                    item.longitude=longitude;
+                    item.latitude=latitude;
+                    item.inside=false;
                     if(route.params.action==="EDIT"){
+                      
                       fetch(`${ip}:8080/pitches/${item.id}`, {method: "PUT",body: JSON.stringify(item),headers: 
                       {"Content-type": "application/json; charset=UTF-8"}});
                     }
@@ -60,7 +66,6 @@ export default function EditPitch({navigation,route}) {
           }
       }
       }/>
-
     </SafeAreaView>
   );
 }

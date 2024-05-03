@@ -8,9 +8,9 @@ import ip from '../global/ip';
 export default function MyPitches({navigation,route}) {
 
   const [pitches, setPitches] = useState([
-    { name: 'PRO-SPORT FOTBAL', location: 'DTR1', rate:200},
-    { name: 'ACS NEW TEAM', location: 'DTR2', rate: 200},
-    { name: 'TEREN GORJULUI', location: 'DTR3', rate: 200},
+    { name: 'PRO-SPORT FOTBAL', location: 'DTR1', rate:200,latitude:45,longitutde:26},
+    { name: 'ACS NEW TEAM', location: 'DTR2', rate: 200,latitude:45,longitutde:26},
+    { name: 'TEREN GORJULUI', location: 'DTR3', rate: 200,latitude:45,longitutde:26},
   ]);
 
   const getPitches = async () => {
@@ -38,11 +38,13 @@ useEffect(() => {
 }, );
   return (
     <SafeAreaView >
-      <Button color="green" title="Add Pitch" onPress={()=>{navigation.navigate("Edit Pitch",{item:{"ManagerUsername":route.params.user, "description": "", "imageLink": "", "location": "", "name": "", "rate": ""},action:'ADD'});}}/>
+      <Button color="green" title="Add Pitch" onPress={()=>{navigation.navigate("Edit Pitch",{item:{"ManagerUsername":route.params.user, "description": "", "imageLink": "", "location": "", "name": "", "rate": "","latitude":44.439663,"longitude":44.439663},action:'ADD'});}}/>
       <FlatList data={pitches} renderItem={({ item }) => (
         <View style={styles.itemContainer}>
           <PitchCard  item={item} />
-          <TouchableOpacity onPress={() =>{navigation.navigate("Edit Pitch",{item,action:"EDIT"});}}>
+          <TouchableOpacity onPress={() =>{
+            console.log(item);
+            navigation.navigate("Edit Pitch",{item,action:"EDIT"});}}>
             <MaterialIcons style={styles.icon} name="edit-note" size={30} color="black" />
           </TouchableOpacity>
           <TouchableOpacity onPress={()=> Alert.alert('Confirm deletion', `Are you sure you want to delete this pitch?`,

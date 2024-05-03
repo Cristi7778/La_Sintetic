@@ -23,6 +23,20 @@ export const Pitch = db.define("Pitch", {
     },
 	description:{
 		type:DataTypes.TEXT
+	},
+	latitude:{
+		type:DataTypes.FLOAT,
+		allowNull:false,
+
+	},
+	longitude:{
+		type:DataTypes.FLOAT,
+		allowNull:false,
+
+	},
+	inside:{
+		type:DataTypes.BOOLEAN,
+		allowNull:false,
 	}
 },
 {

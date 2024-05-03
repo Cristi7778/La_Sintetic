@@ -3,8 +3,11 @@
     "name" : "Micii fotbalisti",
     "rate": 300,
     "imageLink": "",
-    "ManagerUsername": "manager7778",
-    "description": "This pitch is very beautiful!"
+    "ManagerUsername": "mana123",
+    "description": "This pitch is very beautiful!",
+    "latitude":44.439663,
+    "longitude":44.439663,
+    "inside":true
 }
 {
     "location" :"Soseaua Progresului nr.14",

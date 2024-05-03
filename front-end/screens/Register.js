@@ -67,9 +67,10 @@ export default function Register() {
             `${ip}:8080/managers/${username}`,
           );
           const json2 = await response2.json();
-          if(json2.status===404 && json.message==='manager not found.'){
+          if(response2.status===404 && json2.message==='manager not found.'){
           await fetch(`${ip}:8080/users`, {method: "POST",body: JSON.stringify(body),headers: 
                         {"Content-type": "application/json; charset=UTF-8"}});
+          navigation.pop();
           }
           else{
             Alert.alert("Register error","Username is already in use.");
@@ -83,12 +84,13 @@ export default function Register() {
       console.error(error);
     }
   };
-  const registerManger = async () =>{
+  const registerManager = async () =>{
     const body={"username" : username,
     "password" : password,
     "email" : email,
     "phone" : phone}
     try {
+      console.log("check managers")
       const response = await fetch(
         `${ip}:8080/managers/${username}`,
       );
@@ -98,9 +100,10 @@ export default function Register() {
             `${ip}:8080/users/${username}`,
           );
           const json2 = await response2.json();
-          if(json2.status===404 && json.message==='user not found.'){
+          if(response.status===404 && json2.message==='user not found.'){
           await fetch(`${ip}:8080/managers`, {method: "POST",body: JSON.stringify(body),headers: 
                         {"Content-type": "application/json; charset=UTF-8"}});
+          console.log("manager nou");
           }
           else{
             Alert.alert("Register error","Username is already in use.");
@@ -111,7 +114,6 @@ export default function Register() {
       }
     }
     catch (error) {
-      console.error(error);
     }
   };
   return (
@@ -145,7 +147,7 @@ export default function Register() {
           registerUser();
         }
         else if(selectedId==='2'){
-          registerManger();
+          registerManager();
         }
       }
       }} />
