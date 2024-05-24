@@ -1,9 +1,10 @@
-import {SafeAreaView,Alert,FlatList, Text, View,TouchableOpacity,StyleSheet} from 'react-native';
+import {SafeAreaView,Alert,FlatList, Text, View,TouchableOpacity,StyleSheet,Image} from 'react-native';
 import React, { useState,useEffect,useContext } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import ip from '../global/ip';
 import { UserContext } from '../contexts/UserContext';
 import MapView,{Marker} from 'react-native-maps';
+import { globalStyles } from '../global/globalStyles';
 
 const latitudeDelta = 0.025;
 const longitudeDelta = 0.025;
@@ -19,6 +20,7 @@ export default function AddReservations({route}) {
     latitude: route.params.item.latitude,
     longitude:route.params.item.longitude,
 });
+const image=route.params.item.imageLink;
   const {user}=useContext(UserContext);
   const onChange = (e, selectedDate) => {
     setDate(selectedDate);
@@ -71,12 +73,6 @@ export default function AddReservations({route}) {
       <View>
       <Text>{route.params.item.name}</Text>
       </View>
-      <View style={styles.container}>  
-      <MapView region={region} style={styles.map}>
-        <Marker coordinate={region} title='Marker'/>
-      </MapView>
-  
-      </View>
       <TouchableOpacity onPress={openPicker}>
       <Text>{date.toDateString()}</Text>
       </TouchableOpacity>
@@ -111,6 +107,13 @@ export default function AddReservations({route}) {
         </TouchableOpacity>
       )} />
     </View>
+    <Image src={image} alt={image} style={globalStyles.image}></Image>
+    <View style={styles.container}>  
+      <MapView region={region} style={styles.map}>
+        <Marker coordinate={region} title='Marker'/>
+      </MapView>
+  
+      </View>
     </SafeAreaView>
       
   );

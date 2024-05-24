@@ -5,7 +5,6 @@ import ip from '../global/ip';
 import { globalStyles } from '../global/globalStyles';
 import UploadImageModal from '../components/UploadImageModal';
 import LocationPicker from '../components/LocationPicker';
-import App from '../components/UploadImage';
 export default function Login({navigation}) {
   const [username, setUsername] = useState(' ');
   const [password, setPassword] = useState(' ');
@@ -99,7 +98,7 @@ export default function Login({navigation}) {
       title='Open modal'
       onPress={()=>{setModalOpen(true)}}/>
       <Image
-      source={{uri:image}}
+      src='https://la-sintetic.s3.eu-central-1.amazonaws.com/s3/imagine'
       style={globalStyles.image}/>
     </View>
   );

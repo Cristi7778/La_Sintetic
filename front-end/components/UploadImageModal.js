@@ -1,7 +1,6 @@
 import { Modal, TouchableOpacity, View,StyleSheet} from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker'
-import { globalStyles } from '../global/globalStyles';
+import * as ImagePicker from 'expo-image-picker';
 import { AwsOptions } from "../global/aws";
 import { RNS3 } from "react-native-aws3";
 export default function UploadImageModal({modalOpen,setImage,setModalOpen}){
