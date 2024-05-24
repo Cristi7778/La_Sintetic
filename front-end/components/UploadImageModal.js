@@ -1,8 +1,6 @@
 import { Modal, TouchableOpacity, View,StyleSheet} from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import { AwsOptions } from "../global/aws";
-import { RNS3 } from "react-native-aws3";
 export default function UploadImageModal({modalOpen,setImage,setModalOpen}){
     const uploadImage= async(mode)=>{
         try{
@@ -22,17 +20,6 @@ export default function UploadImageModal({modalOpen,setImage,setModalOpen}){
           }
           if(!result.canceled){
             await saveImage(result.assets[0].uri);
-            
-          const file={
-            uri:result.assets[0].uri,
-            name:'imagine',
-            type:'image/png'
-          }
-          RNS3.put(file,AwsOptions).then((response)=>{
-            console.log(response);
-            console.log(response.body.postResponse.location);
-          });
-          console.log(file);
           }
         }
         catch(error){

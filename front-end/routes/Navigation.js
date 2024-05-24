@@ -89,7 +89,7 @@ function ManagerStackGroup(){
     return (
         <ManagerStack.Navigator>
             <ManagerStack.Screen name="Home" component={MyPitches} options={{headerShown:false}}/>
-            <ManagerStack.Screen name="Edit Pitch" component={EditPitch}/>
+            <ManagerStack.Screen name="Edit Pitch" component={EditPitch} options={{headerShown:false}}/>
         </ManagerStack.Navigator>
     )
 }

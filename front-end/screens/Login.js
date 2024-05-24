@@ -2,15 +2,10 @@ import React, { useState,useEffect,useContext } from 'react';
 import {Button, Text, View,StyleSheet, TextInput,Alert,Image} from 'react-native';
 import { UserContext } from '../contexts/UserContext';
 import ip from '../global/ip';
-import { globalStyles } from '../global/globalStyles';
-import UploadImageModal from '../components/UploadImageModal';
-import LocationPicker from '../components/LocationPicker';
 export default function Login({navigation}) {
   const [username, setUsername] = useState(' ');
   const [password, setPassword] = useState(' ');
   const {setUser}=useContext(UserContext);
-  const [image,setImage]=useState();
-  const [modalOpen,setModalOpen]=useState(false);
   const getUserByUsername = async (user) => {
     try {
       const response = await fetch(
@@ -93,13 +88,6 @@ export default function Login({navigation}) {
           navigation.navigate('Register');
         }}
       />
-    <UploadImageModal modalOpen={modalOpen} setModalOpen={setModalOpen} setImage={setImage}/>
-      <Button
-      title='Open modal'
-      onPress={()=>{setModalOpen(true)}}/>
-      <Image
-      src='https://la-sintetic.s3.eu-central-1.amazonaws.com/s3/imagine'
-      style={globalStyles.image}/>
     </View>
   );
 };
