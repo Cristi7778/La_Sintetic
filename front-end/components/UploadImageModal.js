@@ -37,7 +37,7 @@ export default function UploadImageModal({modalOpen,setImage,setModalOpen}){
       }
     return (
         <View>
-            <Modal  transparent={true} visible={modalOpen}>
+            <Modal statusBarTranslucent={true} visible={modalOpen}>
                 <View style={styles.container}>
                     <TouchableOpacity style={styles.icons} onPress={uploadImage}>
                         <MaterialIcons  name="camera-alt" size={40} color="black" />

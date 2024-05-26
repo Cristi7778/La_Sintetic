@@ -38,7 +38,7 @@ useEffect(() => {
 }, );
   return (
     <SafeAreaView >
-      <Button color="green" title="Add Pitch" onPress={()=>{navigation.navigate("Edit Pitch",{item:{"ManagerUsername":route.params.user, "description": "", "imageLink": "", "location": "", "name": "", "rate": "","latitude":44.439663,"longitude":44.439663},action:'ADD'});}}/>
+      <Button color="green" title="Add Pitch" onPress={()=>{navigation.navigate("Edit Pitch",{item:{"ManagerUsername":route.params.user, "description": "", "imageLink": "", "location": "", "name": "", "rate": "","latitude":44.43574915559583,"longitude":26.10172023823842},action:'ADD'});}}/>
       <FlatList data={pitches} renderItem={({ item }) => (
         <View style={styles.itemContainer}>
           <PitchCard  item={item} />

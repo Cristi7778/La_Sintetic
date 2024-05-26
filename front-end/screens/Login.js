@@ -12,6 +12,7 @@ export default function Login({navigation}) {
         `${ip}:8080/users/${user}`,
        
       );
+      
       const json = await response.json();
       if(response.status===200){
         if(json.user.password===password){

@@ -5,7 +5,8 @@ import LocationPicker from '../components/LocationPicker';
 import { AwsOptions } from "../global/aws";
 import { RNS3 } from "react-native-aws3";
 import UploadImageModal from '../components/UploadImageModal';
-import {globalStyles} from '../global/globalStyles';
+import getDistance from '../components/DistanceCalculator';
+import RecommandationModal from '../components/RecommandationModal';
 export default function EditPitch({navigation,route}) {
   const [item, setItem] = useState(route.params.item);
   const [name, setName] = useState(item.name);
@@ -16,7 +17,7 @@ export default function EditPitch({navigation,route}) {
   const [longitude,setLongitude]=useState(item.longitude);
   const [image,setImage]=useState('');
   const [modalOpen,setModalOpen]=useState(false);
-  
+  const [recommandationModal,setRecommandationModal]=useState(false);
   return (
     <SafeAreaView>
       <TextInput name="Name"  placeholder="Pitch Name" defaultValue={item.name} onChangeText={(value)=>setName(value)}/>
@@ -27,10 +28,17 @@ export default function EditPitch({navigation,route}) {
       title='Select Picture'
       onPress={()=>{setModalOpen(true)}}/>
       <LocationPicker lat={latitude} long={longitude} setLat={setLatitude} setLong={setLongitude}/>
+      <Button
+      title='Get price recommandation'
+      onPress={()=>{
+        setRecommandationModal(true);
+}
+      }/>
       <Button color="red" title="Cancel" onPress={()=>{
         navigation.pop();
       }}/>
       <UploadImageModal modalOpen={modalOpen} setModalOpen={setModalOpen} setImage={setImage}/>
+      <RecommandationModal recommandationModal={recommandationModal} distance={getDistance(latitude,longitude,44.43574915559583, 26.10172023823842)} setRecommandationModal={setRecommandationModal}/>
      
       <Button color="green" title="Save" onPress={async()=>{
           if (name.length>0)
