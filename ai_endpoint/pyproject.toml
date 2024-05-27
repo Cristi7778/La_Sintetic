@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "cristi"
+version = "0.1.0"
+description = ""
+authors = ["cristi7778 <cristian.david7778@yahoo.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.111.0"
+numpy = "^1.26.4"
+matplotlib = "^3.9.0"
+scikit-learn = "^1.5.0"
+pandas = "^2.2.2"
+pydantic-settings = "^2.2.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,105 @@
+Nume,Distanta,Acoperit,Lungime,Latime,Pret
+Micii Fotbalisti,6.9,FALSE,42,21,150
+Fotbal Club Planet,5.8,FALSE,36,14,100
+Apolo Fotbal,4.2,FALSE,40,20,175
+Apolo Fotbal,4.2,TRUE,40,20,225
+CCST Sportul Studentesc,4.8,FALSE,45,30,200
+CCST Sportul Studentesc,4.8,TRUE,45,30,250
+CCST Sportul Studentesc,4.8,FALSE,65,42,400
+CCST Sportul Studentesc,4.8,TRUE,65,42,450
+Green Tech FC,6.5,FALSE,28,14,120
+Astra Kids Arena,4.5,FALSE,55,24,175
+Astra Kids Arena,4.5,TRUE,55,24,200
+Daimon Fotbal,4.1,FALSE,34,16,85
+Daimon Fotbal,4.1,TRUE,34,16,125
+Marica-Nastase SC,5.6,FALSE,100,64,1000
+Marica-Nastase SC,5.6,FALSE,40,20,300
+Marica-Nastase SC,5.6,TRUE,40,20,350
+Olimpic Club,8.5,FALSE,42,22,100
+D'Angelo SC,8.7,FALSE,36,17,140
+D'Angelo SC,8.7,FALSE,42,21,160
+D'Angelo SC,8.7,TRUE,36,17,170
+Royal Victory Arena,4.6,FALSE,40,20,160
+Royal Victory Arena,4.6,FALSE,38,18,110
+Royal Victory Arena,4.6,FALSE,60,40,450
+Royal Victory Arena,4.6,FALSE,53,38,300
+Royal Victory Arena,4.6,TRUE,40,20,180
+Royal Victory Arena,4.6,TRUE,38,18,150
+Royal Victory Arena,4.6,TRUE,60,40,480
+Royal Victory Arena,4.6,TRUE,53,38,330
+Baza Voinicelul,4.1,FALSE,22,21,100
+Baza Voinicelul,4.1,TRUE,22,21,130
+Baza Voinicelul,4.1,FALSE,42,22,160
+Galaxy FC,4.8,FALSE,45,24,160
+Galaxy FC,4.8,FALSE,36,18,120
+Galaxy FC,4.8,TRUE,45,25,220
+Galaxy FC,4.8,TRUE,36,18,200
+Galaxy FC,4.8,FALSE,36,18,120
+Pescariu Sports,4.5,FALSE,40,20,190
+Parcul Teilor,8,FALSE,22,12,80
+Parcul Teilor,8,FALSE,28,14,100
+CMS Bucuresti,4.9,FALSE,55,24,240
+CMS Bucuresti,4.9,FALSE,40,20,160
+Sud Arena,6.7,FALSE,40,20,150
+Sud Arena,6.7,TRUE,40,20,180
+Sud Arena,6.7,FALSE,28,18,100
+Sud Arena,6.7,TRUE,28,18,130
+Sud Arena,6.7,FALSE,32,20,130
+Sud Arena,6.7,TRUE,32,20,160
+CS Ana Maria,8.2,FALSE,42,21,150
+CS Ana Maria,8.2,TRUE,42,21,200
+Football Point,8.6,FALSE,36,17,70
+Football Point,8.6,TRUE,36,17,160
+Football Point,8.6,FALSE,40,21,120
+Football Point,8.6,TRUE,40,21,200
+Arena Alexandreea,4.2,FALSE,41,21,225
+Arena Alexandreea,4.2,TRUE,41,21,275
+Magic Arena,5.8,FALSE,40,20,125
+Magic Arena,5.8,TRUE,40,20,150
+Magic Arena,5.8,FALSE,60,40,200
+Magic Arena,5.8,TRUE,60,40,250
+Magic Arena,5.8,FALSE,80,40,350
+Magic Arena,5.8,TRUE,80,40,400
+SC Agronomia,4.6,FALSE,40,20,200
+SC Agronomia,4.6,FALSE,50,30,275
+SC Agronomia,4.6,FALSE,80,50,400
+SC Agronomia,4.6,FALSE,116,68,800
+SC Agronomia,4.6,TRUE,40,20,250
+SC Agronomia,4.6,TRUE,50,30,350
+SC Agronomia,4.6,TRUE,80,50,450
+Mirano Fotbal,3.4,TRUE,35,20,200
+Mirano Fotbal,3.4,TRUE,42,22,250
+AS Real New,7,FALSE,38,19,130
+AS Real New,7,TRUE,38,19,150
+Lempes Arena,4,FALSE,55,26,250
+Extrem Sintetic,6.9,FALSE,37,19,120
+Extrem Sintetic,6.9,TRUE,37,19,160
+AS Galactik ,8.1,TRUE,45,20,250
+AS Galactik ,8.1,FALSE,45,20,200
+AS Tiki Taka,6.7,FALSE,36,20,140
+AS Tiki Taka,6.7,TRUE,36,20,180
+Football Arena,4.9,FALSE,43,20,200
+Football Arena,4.9,TRUE,43,20,240
+Football Arena,4.9,FALSE,52,25,250
+Football Arena,4.9,TRUE,52,25,300
+Complex Primaverii,7.1,FALSE,40,21,130
+Complex Primaverii,7.1,TRUE,40,21,160
+Premium Tenis Club,7.6,FALSE,38,18,120
+Pro Fotbal,6.2,FALSE,40,23,160
+Pro Fotbal,6.2,FALSE,50,25,200
+Pro Fotbal,6.2,TRUE,50,25,230
+ACS Danilescu ,8.6,FALSE,60,28,250
+ACS Danilescu ,8.6,TRUE,60,28,320
+ACS Danilescu ,8.6,FALSE,28,15,100
+ACS Danilescu ,8.6,TRUE,28,15,12
+Mircea Eliade,4.6,FALSE,32,16,100
+Mircea Eliade,4.6,FALSE,45,22,160
+Mircea Eliade,4.6,TRUE,45,22,180
+Soccer Point,6.5,TRUE,36,16,150
+Athletic Park,4.6,FALSE,46,21,180
+Athletic Park,4.6,TRUE,46,21,220
+Herastrau Football,5.7,TRUE,60,28,260
+Herastrau Football,5.7,FALSE,42,21,180
+Herastrau Football,5.7,FALSE,44,21,200
+Herastrau Football,5.7,TRUE,42,21,220
+Herastrau Football,5.7,TRUE,44,21,240
