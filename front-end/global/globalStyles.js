@@ -25,5 +25,10 @@ export const globalStyles = StyleSheet.create({
     height:150,
     borderWidth:5,
     backgroundColor:'blue',
+  },
+  title:{
+    marginVertical: 8,
+    lineHeight: 20,
+    fontSize:20,
   }
 });

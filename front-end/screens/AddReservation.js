@@ -1,4 +1,4 @@
-import {SafeAreaView,Alert,FlatList, Text, View,TouchableOpacity,StyleSheet,Image} from 'react-native';
+import {SafeAreaView,Alert,FlatList, Text, View,TouchableOpacity,StyleSheet,Image,Dimensions, ScrollView} from 'react-native';
 import React, { useState,useEffect,useContext } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import ip from '../global/ip';
@@ -8,6 +8,7 @@ import { globalStyles } from '../global/globalStyles';
 
 const latitudeDelta = 0.025;
 const longitudeDelta = 0.025;
+const windowWidth = Dimensions.get('window').width;
 export default function AddReservations({route}) {
   const [availableHours,setAvailableHours]=useState(['00:00','02:00','04:00','06:00'
   ,'08:00','10:00','12:00','14:00','16:00','18:00','20:00','22:00']);
@@ -69,12 +70,15 @@ const image=route.params.item.imageLink;
   },[date])
   
   return (
-    <SafeAreaView >
+    <ScrollView>
+    <SafeAreaView style={styles.page}>
       <View>
-      <Text>{route.params.item.name}</Text>
+      <Text style={styles.title}>{route.params.item.name}</Text>
+      <Text style={styles.text}>{route.params.item.description}</Text>
+      <Text style={styles.text}>Rate:{route.params.item.rate}RON/HR</Text>
       </View>
       <TouchableOpacity onPress={openPicker}>
-      <Text>{date.toDateString()}</Text>
+      <Text style={styles.text}>Date:{date.toDateString()}</Text>
       </TouchableOpacity>
       <View>
       {show &&<DateTimePicker
@@ -86,9 +90,9 @@ const image=route.params.item.imageLink;
       </View>
       <View >
       <FlatList contentContainerStyle={{alignSelf: 'flex-start'}}
-      numColumns='3'
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
+      horizontal={true}
       data={availableHours} renderItem={({ item }) => (
         <TouchableOpacity onPress={()=>{
           Alert.alert('Confirm reservation', `Do you want to create a reservation for ${route.params.item.name} located at
@@ -107,32 +111,51 @@ const image=route.params.item.imageLink;
         </TouchableOpacity>
       )} />
     </View>
-    <Image src={image} alt={image} style={globalStyles.image}></Image>
-    <View style={styles.container}>  
+    <Image src={image} alt={image} style={styles.image}></Image> 
+    <Text style={styles.text}>{route.params.item.location}</Text>
       <MapView region={region} style={styles.map}>
         <Marker coordinate={region} title='Marker'/>
       </MapView>
-  
-      </View>
     </SafeAreaView>
-      
+    </ScrollView>
   );
 };
 export const styles= StyleSheet.create({
+  page:{
+    backgroundColor: '#b9e4d6',
+    
+  },
+  text:{
+    fontSize:20,
+    marginHorizontal:12,
+    color:'#595959',
+  },
   hourCard:{
-    backgroundColor:'orange',
+    backgroundColor:'#13a015',
     borderColor:'black',
     margin:3,
     fontSize:24,
     borderRadius:12,
     padding:6,
   },
-  map: {
-        width:400,
-        height:200
+  title:{
+    textAlign:'center',
+    fontSize:30,
+    color:'#595959',
   },
-  container:{
-    width:400,
-    height:200
+  map: { 
+    borderWidth:8,
+    borderColor:'black',
+    width:windowWidth*5/6,
+    height:windowWidth*10/18,
+    margin:windowWidth/12,
+  },
+  image:{
+    borderWidth:4,
+    borderColor:'gray',
+    marginHorizontal:windowWidth/12,
+    marginVertical:windowWidth/24,
+    width:windowWidth*5/6,
+    height:windowWidth*9/10,
   },
 });

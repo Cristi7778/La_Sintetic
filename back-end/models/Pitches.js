@@ -1,11 +1,11 @@
-import {db} from "./config.js";
-import {DataTypes} from "sequelize";
+import { db } from "./config.js";
+import { DataTypes } from "sequelize";
 
 export const Pitch = db.define("Pitch", {
-	id:{
-		type:DataTypes.INTEGER,
-		primaryKey:true,
-		autoIncrement:true,
+	id: {
+		type: DataTypes.INTEGER,
+		primaryKey: true,
+		autoIncrement: true,
 	},
 	location: {
 		type: DataTypes.STRING,
@@ -16,34 +16,32 @@ export const Pitch = db.define("Pitch", {
 	},
 	rate: {
 		type: DataTypes.INTEGER,
-        allowNull: false
+		allowNull: false
 	},
-    imageLink: {
-        type:DataTypes.STRING
-    },
-	description:{
-		type:DataTypes.TEXT
+	imageLink: {
+		type: DataTypes.STRING
 	},
-	latitude:{
-		type:DataTypes.FLOAT,
-		allowNull:false,
-
+	description: {
+		type: DataTypes.TEXT
 	},
-	longitude:{
-		type:DataTypes.FLOAT,
-		allowNull:false,
-
+	latitude: {
+		type: DataTypes.FLOAT,
+		allowNull: false,
 	},
-	inside:{
-		type:DataTypes.BOOLEAN,
-		allowNull:false,
+	longitude: {
+		type: DataTypes.FLOAT,
+		allowNull: false,
+	},
+	inside: {
+		type: DataTypes.BOOLEAN,
+		allowNull: false,
 	}
 },
-{
-	indexes: [
-		{
-			unique: true,
-			fields: ['location', 'name']
-		}
-	]
-});
+	{
+		indexes: [
+			{
+				unique: true,
+				fields: ['location', 'name']
+			}
+		]
+	});

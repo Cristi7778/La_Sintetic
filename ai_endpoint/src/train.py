@@ -1,5 +1,5 @@
 import pickle
-
+import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
@@ -44,7 +44,7 @@ def train():
         df.drop(["Pret", "Nume"], axis=1), df["Pret"], test_size=0.3, random_state=42, shuffle=True
     )
 
-    model = RandomForestRegressor(n_estimators=200, random_state=42)
+    model = RandomForestRegressor(n_estimators=200)
 
     model.fit(X_train, y_train)
 
@@ -56,15 +56,14 @@ def train():
     differences = []
     for i in range(len(y_test)):
         differences.append(abs(y_test.iloc[i] - y_pred[i]))
-
+    print(np.mean(differences))
     plt.figure(figsize=(10, 5))
     plt.plot(differences, marker="o", linestyle="-", markersize=4)
-    plt.title("Differences between Predictions and Ground Truth")
-    plt.xlabel("Sample Index")
-    plt.ylabel("Prediction - Ground Truth")
+    plt.title("Diferențe între preziceri și valorea reală")
+    plt.xlabel("Index")
+    plt.ylabel("Prezicere - Valoare reală")
     plt.grid(True)
     plt.show()
-
 
 if __name__ == "__main__":
     train()

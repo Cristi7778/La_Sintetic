@@ -6,11 +6,11 @@ export default function PitchCard({item}){
     const image=item.imageLink;
     return (
         <View style={globalStyles.container}>
-            <Text style={globalStyles.paragraph}>{item.name}</Text>
+            <Text style={globalStyles.title}>{item.name}</Text>
             <View style={styles.location}>
                 <MaterialIcons name="location-pin" size={24} color="black" />
                 <Text style={globalStyles.paragraph}>{item.location}</Text></View>
-            <Text style={globalStyles.paragraph}>{item.rate}</Text>
+            <Text style={globalStyles.paragraph}>Rate:{item.rate}</Text>
             <Image src={image} alt={image} style={globalStyles.image}></Image>
         </View>
     )

@@ -76,19 +76,25 @@ export default function Login({navigation}) {
       secureTextEntry={true}
       onChangeText={(value) => setPassword(value)}
       />
-      <Button color='teal'
-        title="Login"
-        onPress={() => {
-          console.log(username,password);
-          getUserByUsername(username);
+      <View style={styles.button}>
+        <Button color='teal'
+         title="Login"
+          onPress={() => {
+            console.log(username,password);
+            getUserByUsername(username);
+         }}
+        />
+      </View>
+      <View style={styles.button}>
+        <Button 
+         color="teal"
+         title="Register"
+         onPress={() => {
+            navigation.navigate('Register');
         }}
       />
-      <Button color='teal'
-        title="Register"
-        onPress={() => {
-          navigation.navigate('Register');
-        }}
-      />
+      </View>
+      
     </View>
   );
 };
@@ -103,6 +109,9 @@ const styles = StyleSheet.create({
 paragraph: {
   marginVertical: 8,
   lineHeight: 20,
+},
+button:{
+margin:5,
 },
 container: {
   flex: 1,

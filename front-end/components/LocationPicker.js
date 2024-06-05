@@ -19,7 +19,6 @@ export default function LocationPicker({lat,long,setLat,setLong}){
         setRegion(region);
         setLat(region.latitude);
         setLong(region.longitude);
-        console.log(region.latitude,region.longitude);
     };
     onMapLayout = () => {
         setMapReady(true);
