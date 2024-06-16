@@ -24,7 +24,7 @@ const getReviewById = async (req, res) => {
 
 const create = async (req, res) => {
     try {
-        const {Rating, Details} = req.body;
+        const {Rating, Details,UserUsername,PitchId} = req.body;
 
         if (Rating === undefined || Details === undefined) {
             return res.status(400).send({message: "Rating and Details are required"});
@@ -32,7 +32,9 @@ const create = async (req, res) => {
 
         const review = await Review.create({
             Rating,
-            Details
+            Details,
+            UserUsername,
+            PitchId
         });
 
         res.status(201).send({message: "Review was created", review});
@@ -45,11 +47,13 @@ const update = async (req, res) => {
     try {
         const review = await Review.findByPk(req.params.id);
         if (review) {
-            const {Rating, Details} = req.body;
+            const {Rating, Details,UserUsername,PitchId} = req.body;
 
             const updatedReview = await review.update({
                 Rating,
-                Details
+                Details,
+                UserUsername,
+                PitchId
             });
 
             res.status(200).send({review: updatedReview});
