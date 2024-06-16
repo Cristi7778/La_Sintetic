@@ -6,6 +6,7 @@ import { User } from './models/Users.js';
 import { Manager } from './models/Managers.js';
 import { Reservation } from './models/Reservations.js';
 import { Pitch } from './models/Pitches.js';
+import { Review } from './models/Reviews.js';
 
 const PORT = 8080;
 Manager.hasMany(Pitch);
@@ -16,6 +17,9 @@ Reservation.belongsTo(User);
 
 Pitch.hasMany(Reservation);
 Reservation.belongsTo(Pitch);
+
+User.hasMany(Review);
+Review.belongsTo(User);
 
 const app = express();
 app.use(express.json());

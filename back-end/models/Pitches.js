@@ -35,7 +35,10 @@ export const Pitch = db.define("Pitch", {
 	inside: {
 		type: DataTypes.BOOLEAN,
 		allowNull: false,
-	}
+	},
+	rating: {
+		type: DataTypes.FLOAT,
+	},
 },
 	{
 		indexes: [
