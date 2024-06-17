@@ -1,10 +1,11 @@
-import {SafeAreaView,Alert,FlatList, Text, View,TouchableOpacity,StyleSheet,Image,Dimensions, ScrollView} from 'react-native';
+import {SafeAreaView,Alert,FlatList, Text, View,TouchableOpacity,StyleSheet,Image,Dimensions, ScrollView, TextInput, Button} from 'react-native';
 import React, { useState,useEffect,useContext } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import ip from '../global/ip';
 import { UserContext } from '../contexts/UserContext';
 import MapView,{Marker} from 'react-native-maps';
-import { globalStyles } from '../global/globalStyles';
+import StarRating, {StarRatingDisplay} from 'react-native-star-rating-widget';
+import ReviewCard from '../components/ReviewCard';
 
 const latitudeDelta = 0.025;
 const longitudeDelta = 0.025;
@@ -22,6 +23,10 @@ export default function AddReservations({route}) {
     longitude:route.params.item.longitude,
 });
 const image=route.params.item.imageLink;
+const [rating, setRating] = useState(route.params.item.rating);
+const [newRating, setNewRating] = useState(0);
+const [newReview,setNewReview]=useState();
+const [reviews,setReviews]=useState('');
   const {user}=useContext(UserContext);
   const onChange = (e, selectedDate) => {
     setDate(selectedDate);
@@ -62,13 +67,45 @@ const image=route.params.item.imageLink;
     return arr1.filter(item =>{ 
        return !arr2.includes(item)});
 }
+  const getReviews=async()=>{
+    try {
+      const response = await fetch(
+        `${ip}:8080/reviews`,
+       
+      );
+      const json = await response.json();
+      if(response.status===200){
+        const filteredReviews = json.records.filter(entry =>{
+          return entry.PitchId===route.params.item.id;
+      })
+      setReviews(filteredReviews)
+    }
+      else{
+        if(response.status===404){
+          console.log("Reservations not found");
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const addReview= async()=>{
+    if(newReview.length>0&&newRating>0){
+
+    }
+    else{
+
+    }
+  }
   useEffect(() => {
     setListLength(Math.ceil(availableHours.length/3));
   }, [availableHours]);
   useEffect(()=>{
     getReservations();
   },[date])
-  
+  useEffect(()=>{
+    getReviews();
+}, [])
   return (
     <ScrollView>
     <SafeAreaView style={styles.page}>
@@ -78,7 +115,7 @@ const image=route.params.item.imageLink;
       <Text style={styles.text}>Rate:{route.params.item.rate}RON/HR</Text>
       </View>
       <TouchableOpacity onPress={openPicker}>
-      <Text style={styles.text}>Date:{date.toDateString()}</Text>
+      <Text style={styles.text}>Choose a date:{date.toDateString()}</Text>
       </TouchableOpacity>
       <View>
       {show &&<DateTimePicker
@@ -116,6 +153,39 @@ const image=route.params.item.imageLink;
       <MapView region={region} style={styles.map}>
         <Marker coordinate={region} title='Marker'/>
       </MapView>
+      <View style={styles.ratingView}>
+        <StarRatingDisplay
+        rating={rating}
+        starSize={42}
+        />
+        <Text style={styles.ratingText}>({rating})</Text>
+      </View>
+      <View style={styles.addRating}>
+        <Text style={styles.reviewTitle}>Add a review</Text>
+        <View style={styles.reviewStars}>
+          <StarRating
+          starSize={32}
+          rating={newRating}
+          onChange={setNewRating}
+          />
+        </View>
+        <TextInput
+        name="Review" placeholder="Write a review.." value={newReview} onChangeText={setNewReview} style={styles.input}
+        />
+        <TouchableOpacity style={styles.button}onPress={addReview}>
+          <Text style={styles.buttonText}>Send</Text>
+        </TouchableOpacity>
+      </View>
+      
+      <FlatList contentContainerStyle={{alignSelf: 'flex-start'}}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
+      horizontal={true}
+      data={reviews} renderItem={({ item }) => (
+        <ReviewCard
+          item={item}
+        />
+        )} />
     </SafeAreaView>
     </ScrollView>
   );
@@ -158,4 +228,45 @@ export const styles= StyleSheet.create({
     width:windowWidth*5/6,
     height:windowWidth*9/10,
   },
+  ratingView:{
+    flexDirection:"row",
+    marginBottom:12
+  },
+  ratingText:{
+    fontSize:30,
+  },
+  addRating:{
+    backgroundColor:'white',
+    margin:18,
+    borderColor:'grey',
+    borderRadius:8,
+    borderWidth:3,
+  },
+  reviewTitle:{
+    textAlign:'center',
+    fontSize:18,
+    fontWeight:'bold',
+    color:'#595959',
+    margin:4
+  },
+  reviewStars:{
+    textAlign:'center',
+    margin:4
+  },
+  button:{
+    alignItems: 'flex-end',
+    marginVertical:6,
+    marginHorizontal:8,
+  },
+  buttonText:{
+    fontSize:18,
+    backgroundColor:'#2c9abf',
+    padding:8,
+    fontWeight:'bold',
+    borderRadius:14 
+  },
+  input:{
+    fontSize:16,
+    marginHorizontal:8,
+  }
 });
