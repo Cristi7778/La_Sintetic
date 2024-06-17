@@ -91,10 +91,50 @@ const [reviews,setReviews]=useState('');
   };
   const addReview= async()=>{
     if(newReview.length>0&&newRating>0){
-
+      const body={
+        "Rating":newRating,
+        "UserUsername" : user,
+        "PitchId" : route.params.item.id,
+        "Details":newReview}
+      await fetch(`${ip}:8080/reviews`, {method: "POST",body: JSON.stringify(body),headers: 
+        {"Content-type": "application/json; charset=UTF-8"}});
+        setNewRating(0);
+        setNewReview('');
+        updateRating();
     }
     else{
+      Alert.alert('Validation error', `Please provide a valid rating and review`);
+    }
+  }
+  const updateRating=async()=>{
+    try {
+      const response = await fetch(
+        `${ip}:8080/reviews`,
+       
+      );
+      const json = await response.json();
+      if(response.status===200){
+        const filteredReviews = json.records.filter(entry =>{
+          return entry.PitchId===route.params.item.id;
+      })
+      const ratings = filteredReviews.map(item => item.Rating);
 
+      const sum = ratings.reduce((acc, rating) => acc + rating, 0);
+      
+      const averageRating = sum / ratings.length;
+      const body={
+        "rating":averageRating,
+      }
+      await fetch(`${ip}:8080/pitches/${route.params.item.id}`, {method: "PUT",body: JSON.stringify(body),headers: 
+        {"Content-type": "application/json; charset=UTF-8"}});
+    }
+      else{
+        if(response.status===404){
+          console.log("Error updating the reviews");
+        }
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
   useEffect(() => {
@@ -158,7 +198,7 @@ const [reviews,setReviews]=useState('');
         rating={rating}
         starSize={42}
         />
-        <Text style={styles.ratingText}>({rating})</Text>
+        <Text style={styles.ratingText}>({rating.toFixed(2)})</Text>
       </View>
       <View style={styles.addRating}>
         <Text style={styles.reviewTitle}>Add a review</Text>
@@ -172,7 +212,7 @@ const [reviews,setReviews]=useState('');
         <TextInput
         name="Review" placeholder="Write a review.." value={newReview} onChangeText={setNewReview} style={styles.input}
         />
-        <TouchableOpacity style={styles.button}onPress={addReview}>
+        <TouchableOpacity style={styles.button} onPress={addReview}>
           <Text style={styles.buttonText}>Send</Text>
         </TouchableOpacity>
       </View>
