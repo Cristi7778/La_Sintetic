@@ -6,6 +6,7 @@ import { UserContext } from '../contexts/UserContext';
 import MapView,{Marker} from 'react-native-maps';
 import StarRating, {StarRatingDisplay} from 'react-native-star-rating-widget';
 import ReviewCard from '../components/ReviewCard';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const latitudeDelta = 0.025;
 const longitudeDelta = 0.025;
@@ -189,7 +190,10 @@ const [reviews,setReviews]=useState('');
       )} />
     </View>
     <Image src={image} alt={image} style={styles.image}></Image> 
+    <View style={styles.adress}>
+    <MaterialIcons style={styles.icon} name="location-pin" size={24} color="black" />
     <Text style={styles.text}>{route.params.item.location}</Text>
+    </View>
       <MapView region={region} style={styles.map}>
         <Marker coordinate={region} title='Marker'/>
       </MapView>
@@ -308,5 +312,11 @@ export const styles= StyleSheet.create({
   input:{
     fontSize:16,
     marginHorizontal:8,
+  },
+  adress:{
+    flexDirection:'row'
+  },
+  icon:{
+    marginLeft:12
   }
 });

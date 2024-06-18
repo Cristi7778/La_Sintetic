@@ -21,7 +21,7 @@ export const globalStyles = StyleSheet.create({
     borderRadius: 6,
   },
   image:{
-    width:150,
+    width:250,
     height:150,
     borderWidth:5,
     backgroundColor:'blue',
