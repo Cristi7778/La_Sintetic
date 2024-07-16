@@ -2,10 +2,24 @@ import React, { useState,useEffect,useContext } from 'react';
 import {Button, Text, View,StyleSheet, TextInput,Alert,Image} from 'react-native';
 import { UserContext } from '../contexts/UserContext';
 import ip from '../global/ip';
+import * as Crypto from 'expo-crypto';
 export default function Login({navigation}) {
   const [username, setUsername] = useState(' ');
   const [password, setPassword] = useState(' ');
   const {setUser}=useContext(UserContext);
+  const crypto=async (inputString) => {
+    try {
+      const digest = await Crypto.digestStringAsync(
+          Crypto.CryptoDigestAlgorithm.SHA256,
+          inputString
+      );
+      console.log(digest)
+      return digest;
+  } catch (error) {
+      console.error('Error generating digest:', error);
+      throw error;
+  }
+  }
   const getUserByUsername = async (user) => {
     try {
       const response = await fetch(
@@ -15,7 +29,7 @@ export default function Login({navigation}) {
       
       const json = await response.json();
       if(response.status===200){
-        if(json.user.password===password){
+        if(json.user.password===await crypto(password)){
           navigation.navigate("Pitches");
         }
         else{
@@ -32,7 +46,7 @@ export default function Login({navigation}) {
         );
         const json2 = await response2.json();
         if(response2.status===200){
-          if(json2.manager.password===password){
+          if(json2.manager.password===await crypto(password)){
             navigation.navigate('My Pitches', {
               screen: 'Main',
               params: {

@@ -39,7 +39,8 @@
     "react-native-screens": "~3.29.0",
     "react-native-star-rating-widget": "^1.8.0",
     "react-native-tab-view": "^3.5.2",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "expo-crypto": "~12.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
