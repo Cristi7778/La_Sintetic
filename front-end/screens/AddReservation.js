@@ -153,7 +153,7 @@ const [reviews,setReviews]=useState('');
       <View>
       <Text style={styles.title}>{route.params.item.name}</Text>
       <Text style={styles.text}>{route.params.item.description}</Text>
-      <Text style={styles.text}>Rate:{route.params.item.rate}RON/HR</Text>
+      <Text style={styles.text}>Rate:{route.params.item.rate}RON/H</Text>
       </View>
       <TouchableOpacity onPress={openPicker}>
       <Text style={styles.text}>Choose a date:{date.toDateString()}</Text>

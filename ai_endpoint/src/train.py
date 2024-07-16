@@ -52,7 +52,8 @@ def train():
         pickle.dump(model, f)
 
     y_pred = model.predict(X_test)
-
+    print(y_pred)
+    print(y_test)
     differences = []
     for i in range(len(y_test)):
         differences.append(abs(y_test.iloc[i] - y_pred[i]))
@@ -67,3 +68,5 @@ def train():
 
 if __name__ == "__main__":
     train()
+
+
